@@ -48,6 +48,6 @@ export default withSentryConfig(
     silent: true,        // sem output no build
     disableLogger: true,
     tunnelRoute: '/monitoring', // evita bloqueio por ad-blockers
-    hideSourceMaps: true,
+    sourcemaps: { disable: true },
   },
 )
