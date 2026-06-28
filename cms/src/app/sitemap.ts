@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import type { MetadataRoute } from 'next'
 import { sapl } from '@/modules/legislativo/sapl.client'
 import { getPayloadClient } from '@/lib/payload'

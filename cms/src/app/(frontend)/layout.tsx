@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import React from 'react'
 import { Archivo, Public_Sans, Plus_Jakarta_Sans } from 'next/font/google'
 import { obterConfigCamara } from '@/lib/camara'
