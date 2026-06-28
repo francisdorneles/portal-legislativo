@@ -116,6 +116,7 @@ export async function votacoesDaMateria(materiaId: number): Promise<VotacaoMater
               parlamentarId: v.parlamentar,
               nome: p?.nome_parlamentar ?? `Parlamentar ${v.parlamentar}`,
               voto: v.voto ?? '—',
+              fotoUrl: urlDocumento(p?.fotografia),
             }
           }),
         )

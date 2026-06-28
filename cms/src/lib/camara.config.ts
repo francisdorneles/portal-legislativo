@@ -32,8 +32,8 @@ export interface CamaraConfig {
     endereco: string
     bairro: string
     telefone: string
-    email: string
-    horario: string
+    email?: string
+    horario?: string
   }
 }
 
