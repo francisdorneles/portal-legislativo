@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup — Abordagens de Forms do SAPL</title>
+<style>
+  :root {
+    --navy: #081f3d; --azul: #2a6fdb; --amarelo: #ffce3a; --ouro: #a9842f;
+    --tinta: #0e1726; --gelo: #f4f6fa; --linha: #dde3ed; --cinza: #6b7a99;
+    --branco: #fff; --leitura: 72ch;
+    font-family: system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f0f2f7; color: var(--tinta); line-height: 1.6; }
+
+  /* ── Cabeçalho do doc ── */
+  .doc-header {
+    background: var(--navy); color: #fff;
+    padding: 2rem 2.5rem;
+    border-bottom: 4px solid var(--amarelo);
+  }
+  .doc-header h1 { font-size: 1.5rem; font-weight: 800; }
+  .doc-header p  { color: #9fb1c8; margin-top: 0.35rem; font-size: 0.92rem; }
+
+  /* ── Seções de abordagem ── */
+  .abordagem {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+  .ab-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+  }
+  .ab-num {
+    flex: 0 0 auto;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--amarelo);
+    font-weight: 900; font-size: 1.3rem;
+    display: grid; place-items: center;
+  }
+  .ab-titulo { font-size: 1.35rem; font-weight: 800; color: var(--navy); }
+  .ab-desc   { font-size: 0.92rem; color: var(--cinza); margin-top: 0.25rem; max-width: 65ch; }
+  .ab-badge  {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 0.2rem 0.6rem;
+    border-radius: 999px; margin-top: 0.5rem;
+  }
+  .ab-badge--ok  { background: #dcfce7; color: #166534; }
+  .ab-badge--med { background: #fef9c3; color: #854d0e; }
+  .ab-badge--bad { background: #fee2e2; color: #991b1b; }
+
+  /* ── Grade de telas (3 colunas) ── */
+  .telas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Card de tela ── */
+  .tela {
+    background: #fff;
+    border: 1px solid var(--linha);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .tela-label {
+    background: var(--gelo);
+    border-bottom: 1px solid var(--linha);
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cinza);
+  }
+  .tela-body { padding: 1.4rem 1.4rem 1.8rem; flex: 1; }
+
+  /* ── Simulação do portal (wrapper) ── */
+  .portal-wrap {
+    background: #f4f6fa;
+    border-radius: 10px;
+    padding: 1.2rem;
+  }
+  .portal-titulo {
+    font-size: 1rem; font-weight: 800; color: var(--navy);
+    border-bottom: 2px solid var(--amarelo);
+    display: inline-block;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .portal-intro {
+    font-size: 0.85rem; color: var(--cinza);
+    margin-bottom: 1.2rem;
+    max-width: 42ch;
+  }
+
+  /* ── Botão redirect (abordagem 1) ── */
+  .btn-redirect {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--azul);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.3rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-redirect:hover { background: #1a5cc8; }
+  .btn-redirect svg { flex: 0 0 auto; }
+  .redirect-nota {
+    margin-top: 0.9rem;
+    font-size: 0.78rem;
+    color: var(--cinza);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* ── Iframe simulado (abordagem 2) ── */
+  .iframe-box {
+    border: 1px solid var(--linha);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .iframe-barra {
+    background: #e8eaf0;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.7rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .iframe-barra span { font-family: monospace; }
+  .iframe-dots { display: flex; gap: 4px; }
+  .iframe-dots i {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .iframe-content {
+    padding: 1rem;
+  }
+
+  /* ── Simulação do form SAPL "cru" ── */
+  .sapl-form { font-family: Arial, sans-serif; font-size: 13px; color: #222; }
+  .sapl-titulo { font-size: 15px; font-weight: bold; margin-bottom: 8px; color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  .sapl-field { margin-bottom: 8px; }
+  .sapl-field label { display: block; font-size: 12px; margin-bottom: 2px; color: #333; }
+  .sapl-field input,
+  .sapl-field select,
+  .sapl-field textarea {
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    padding: 3px 5px;
+    font-size: 12px;
+    background: #fff;
+  }
+  .sapl-field textarea { height: 52px; resize: vertical; }
+  .sapl-btn {
+    background: #003366;
+    color: #fff;
+    border: none;
+    padding: 5px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
+  .sapl-required { color: red; }
+
+  /* ── Form SAPL estilizado (abordagem 3) ── */
+  .sapl-css .sapl-titulo {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem; font-weight: 800;
+    color: var(--navy);
+    border-bottom: 2px solid var(--amarelo);
+    padding-bottom: 0.35rem;
+    margin-bottom: 1rem;
+  }
+  .sapl-css .sapl-field { margin-bottom: 0.75rem; }
+  .sapl-css .sapl-field label {
+    font-family: system-ui, sans-serif;
+    display: block; font-size: 0.78rem;
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--cinza);
+    margin-bottom: 0.25rem;
+  }
+  .sapl-css .sapl-field input,
+  .sapl-css .sapl-field select,
+  .sapl-css .sapl-field textarea {
+    font-family: system-ui, sans-serif;
+    width: 100%;
+    border: 1.5px solid var(--linha);
+    border-radius: 8px;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.92rem;
+    background: #fff;
+    color: var(--tinta);
+  }
+  .sapl-css .sapl-field textarea { height: 70px; }
+  .sapl-css .sapl-btn {
+    font-family: system-ui, sans-serif;
+    background: var(--azul);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
+  .sapl-required { color: #e53e3e; }
+
+  /* ── Divisor entre abordagens ── */
+  .divisor {
+    max-width: 1100px;
+    margin: 0 auto 0;
+    padding: 0 2rem;
+    border-top: 2px dashed var(--linha);
+  }
+
+  /* ── Legenda de tradeoffs ── */
+  .tradeoffs {
+    max-width: 1100px;
+    margin: 3rem auto 4rem;
+    padding: 0 2rem;
+  }
+  .tradeoffs h2 {
+    font-size: 1.1rem; font-weight: 800;
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .trade-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+  .trade-card {
+    background: #fff;
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .trade-card h3 { font-size: 0.82rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--navy); }
+  .trade-card ul { list-style: none; display: grid; gap: 0.3rem; }
+  .trade-card li { font-size: 0.8rem; color: var(--cinza); display: flex; gap: 0.4rem; }
+  .trade-card li::before { content: attr(data-icon); flex: 0 0 auto; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>Abordagens de formulários do SAPL no portal</h1>
+  <p>3 abordagens × 3 telas — comparativo visual para decisão de MVP. SAPL: http://localhost:8020</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABORDAGEM 1 — REDIRECT
+     ══════════════════════════════════════════════════════════ -->
+<section class="abordagem">
+  <div class="ab-header">
+    <div class="ab-num">1</div>
+    <div>
+      <div class="ab-titulo">Redirect — abre o SAPL numa aba nova</div>
+      <div class="ab-desc">O portal contextualiza (explica o que é, pré-requisitos) e direciona o usuário para a tela nativa do SAPL. Zero retrabalho. O formulário fica 100% no SAPL.</div>
+      <span class="ab-badge ab-badge--ok">✓ Zero manutenção</span>
+      <span class="ab-badge ab-badge--med">△ UX quebra ao sair do portal</span>
+    </div>
+  </div>
+
+  <div class="telas">
+
+    <!-- Tela 1A: Protocolo de Requerimento -->
+    <div class="tela">
+      <div class="tela-label">Tela 1 — Protocolo de Requerimento</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Protocolar Requerimento</div>
+          <p class="portal-intro">Qualquer cidadão pode enviar um requerimento à Câmara. Você será direcionado ao sistema legislativo para preencher o formulário.</p>
+          <div style="background:#fff;border:1px solid var(--linha);border-radius:10px;padding:1rem;margin-bottom:1rem;font-size:0.82rem;color:var(--cinza);">
+            <strong style="color:var(--tinta);display:block;margin-bottom:0.4rem;">Antes de protocolar, tenha em mãos:</strong>
+            • CPF e dados de contato<br>
+            • Texto do requerimento (pode ser simples)<br>
+            • Documentos de apoio (opcional)
+          </div>
+          <a class="btn-redirect" href="http://localhost:8020/protocoloadm/protocolo/criar/" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Protocolar no SAPL
+          </a>
+          <p class="redirect-nota">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Abre em nova aba — sistema legislativo oficial
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela 1B: Inscrição na Tribuna -->
+    <div class="tela">
+      <div class="tela-label">Tela 2 — Inscrição na Tribuna Popular</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Falar na Tribuna</div>
+          <p class="portal-intro">A próxima sessão ocorre em <strong style="color:var(--navy);">24/06/2025 às 18h30</strong>. Inscrições até 23/06 às 17h.</p>
+          <div style="background:#e8f4fd;border:1px solid #b8d8f0;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.82rem;color:#1a5276;">
+            ℹ️ Você terá <strong>5 minutos</strong> para se manifestar. Trazer documento de identificação.
+          </div>
+          <a class="btn-redirect" href="http://localhost:8020/sessao/oradorexpediente/criar/" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Inscrever-se no SAPL
+          </a>
+          <p class="redirect-nota">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Abre em nova aba — sistema legislativo oficial
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela 1C: Acompanhar Matéria -->
+    <div class="tela">
+      <div class="tela-label">Tela 3 — Acompanhar Matéria por E-mail</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Receber atualizações</div>
+          <p class="portal-intro">Cadastre-se para receber notificações quando esta matéria avançar na tramitação.</p>
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.82rem;color:#166534;">
+            ✓ Você receberá um e-mail a cada nova movimentação do <strong>PL 012/2025</strong>
+          </div>
+          <a class="btn-redirect" href="http://localhost:8020/materia/acompanhamento/" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Cadastrar no SAPL
+          </a>
+          <p class="redirect-nota">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Abre em nova aba — sistema legislativo oficial
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABORDAGEM 2 — IFRAME SEM CSS
+     ══════════════════════════════════════════════════════════ -->
+<section class="abordagem">
+  <div class="ab-header">
+    <div class="ab-num">2</div>
+    <div>
+      <div class="ab-titulo">Iframe sem CSS — SAPL embutido, interface original</div>
+      <div class="ab-desc">O form do SAPL aparece dentro da página do portal, mas com visual Django/Plone original. O usuário não sai do portal, mas vê uma interface diferente.</div>
+      <span class="ab-badge ab-badge--ok">✓ Usuário não sai do portal</span>
+      <span class="ab-badge ab-badge--bad">✗ Visual destoante</span>
+    </div>
+  </div>
+
+  <div class="telas">
+
+    <!-- Tela 2A: Protocolo de Requerimento -->
+    <div class="tela">
+      <div class="tela-label">Tela 1 — Protocolo de Requerimento</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Protocolar Requerimento</div>
+          <p class="portal-intro" style="margin-bottom:0.8rem;">Preencha o formulário abaixo para protocolar seu requerimento.</p>
+          <div class="iframe-box">
+            <div class="iframe-barra">
+              <div class="iframe-dots">
+                <i style="background:#ff5f57"></i>
+                <i style="background:#febc2e"></i>
+                <i style="background:#28c840"></i>
+              </div>
+              <span>localhost:8020/protocoloadm/protocolo/criar/</span>
+            </div>
+            <div class="iframe-content">
+              <div class="sapl-form">
+                <div class="sapl-titulo">Protocolo — Novo Requerimento</div>
+                <div class="sapl-field">
+                  <label>Tipo de Matéria <span class="sapl-required">*</span></label>
+                  <select><option>Requerimento</option><option>Indicação</option><option>Moção</option></select>
+                </div>
+                <div class="sapl-field">
+                  <label>Assunto <span class="sapl-required">*</span></label>
+                  <input type="text" placeholder="Assunto do requerimento">
+                </div>
+                <div class="sapl-field">
+                  <label>Texto <span class="sapl-required">*</span></label>
+                  <textarea placeholder="Digite o texto..."></textarea>
+                </div>
+                <div class="sapl-field">
+                  <label>Nome do Autor <span class="sapl-required">*</span></label>
+                  <input type="text">
+                </div>
+                <button class="sapl-btn">Protocolar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela 2B: Tribuna -->
+    <div class="tela">
+      <div class="tela-label">Tela 2 — Inscrição na Tribuna Popular</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Falar na Tribuna</div>
+          <p class="portal-intro" style="margin-bottom:0.8rem;">Sessão: <strong>24/06/2025 às 18h30</strong>. Preencha abaixo.</p>
+          <div class="iframe-box">
+            <div class="iframe-barra">
+              <div class="iframe-dots">
+                <i style="background:#ff5f57"></i>
+                <i style="background:#febc2e"></i>
+                <i style="background:#28c840"></i>
+              </div>
+              <span>localhost:8020/sessao/oradorexpediente/criar/</span>
+            </div>
+            <div class="iframe-content">
+              <div class="sapl-form">
+                <div class="sapl-titulo">Inscrição — Orador Expediente</div>
+                <div class="sapl-field">
+                  <label>Sessão Plenária <span class="sapl-required">*</span></label>
+                  <select><option>Sessão Ordinária — 24/06/2025</option></select>
+                </div>
+                <div class="sapl-field">
+                  <label>Nome <span class="sapl-required">*</span></label>
+                  <input type="text" placeholder="Seu nome completo">
+                </div>
+                <div class="sapl-field">
+                  <label>Assunto <span class="sapl-required">*</span></label>
+                  <input type="text" placeholder="Assunto da fala">
+                </div>
+                <button class="sapl-btn">Inscrever</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela 2C: Acompanhar -->
+    <div class="tela">
+      <div class="tela-label">Tela 3 — Acompanhar Matéria por E-mail</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Receber atualizações</div>
+          <p class="portal-intro" style="margin-bottom:0.8rem;">Preencha abaixo para acompanhar o <strong>PL 012/2025</strong>.</p>
+          <div class="iframe-box">
+            <div class="iframe-barra">
+              <div class="iframe-dots">
+                <i style="background:#ff5f57"></i>
+                <i style="background:#febc2e"></i>
+                <i style="background:#28c840"></i>
+              </div>
+              <span>localhost:8020/materia/acompanhamento/</span>
+            </div>
+            <div class="iframe-content">
+              <div class="sapl-form">
+                <div class="sapl-titulo">Acompanhar Matéria</div>
+                <div class="sapl-field">
+                  <label>E-mail <span class="sapl-required">*</span></label>
+                  <input type="email" placeholder="seu@email.com">
+                </div>
+                <div class="sapl-field">
+                  <label>Hash de confirmação</label>
+                  <input type="text" placeholder="(será enviado por e-mail)">
+                </div>
+                <button class="sapl-btn">Cadastrar</button>
+                <p style="font-size:11px;color:#666;margin-top:6px;">Você receberá um e-mail para confirmar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABORDAGEM 3 — IFRAME + CSS INJECTION (SAME-ORIGIN)
+     ══════════════════════════════════════════════════════════ -->
+<section class="abordagem">
+  <div class="ab-header">
+    <div class="ab-num">3</div>
+    <div>
+      <div class="ab-titulo">Iframe + CSS Injection — SAPL estilizado</div>
+      <div class="ab-desc">O SAPL e o portal ficam no mesmo domínio (ex: sapl.taquari.rs.gov.br × portal.taquari.rs.gov.br com proxy reverso). O portal injeta um stylesheet no iframe via postMessage ou proxy, reestilizando os campos nativos do SAPL.</div>
+      <span class="ab-badge ab-badge--ok">✓ Visual coerente</span>
+      <span class="ab-badge ab-badge--med">△ Precisa same-origin ou proxy</span>
+      <span class="ab-badge ab-badge--med">△ Frágil: muda se SAPL atualizar HTML</span>
+    </div>
+  </div>
+
+  <div class="telas">
+
+    <!-- Tela 3A: Protocolo de Requerimento -->
+    <div class="tela">
+      <div class="tela-label">Tela 1 — Protocolo de Requerimento</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Protocolar Requerimento</div>
+          <p class="portal-intro" style="margin-bottom:0.8rem;">Preencha o formulário abaixo para protocolar seu requerimento.</p>
+          <div class="sapl-css">
+            <div class="sapl-titulo">Novo Requerimento</div>
+            <div class="sapl-field">
+              <label>Tipo de Matéria <span class="sapl-required">*</span></label>
+              <select><option>Requerimento</option><option>Indicação</option><option>Moção</option></select>
+            </div>
+            <div class="sapl-field">
+              <label>Assunto <span class="sapl-required">*</span></label>
+              <input type="text" placeholder="Assunto do requerimento">
+            </div>
+            <div class="sapl-field">
+              <label>Texto <span class="sapl-required">*</span></label>
+              <textarea placeholder="Digite o texto..."></textarea>
+            </div>
+            <div class="sapl-field">
+              <label>Nome do Autor <span class="sapl-required">*</span></label>
+              <input type="text">
+            </div>
+            <button class="sapl-btn">Protocolar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela 3B: Tribuna -->
+    <div class="tela">
+      <div class="tela-label">Tela 2 — Inscrição na Tribuna Popular</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Falar na Tribuna</div>
+          <p class="portal-intro" style="margin-bottom:0.8rem;">Sessão: <strong style="color:var(--navy);">24/06/2025 às 18h30</strong>.</p>
+          <div class="sapl-css">
+            <div class="sapl-titulo">Inscrição — Tribuna Popular</div>
+            <div class="sapl-field">
+              <label>Sessão Plenária <span class="sapl-required">*</span></label>
+              <select><option>Sessão Ordinária — 24/06/2025</option></select>
+            </div>
+            <div class="sapl-field">
+              <label>Nome Completo <span class="sapl-required">*</span></label>
+              <input type="text" placeholder="Seu nome completo">
+            </div>
+            <div class="sapl-field">
+              <label>Assunto da Fala <span class="sapl-required">*</span></label>
+              <input type="text" placeholder="Sobre o que vai falar?">
+            </div>
+            <button class="sapl-btn">Inscrever-se</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela 3C: Acompanhar -->
+    <div class="tela">
+      <div class="tela-label">Tela 3 — Acompanhar Matéria por E-mail</div>
+      <div class="tela-body">
+        <div class="portal-wrap">
+          <div class="portal-titulo">Receber atualizações</div>
+          <p class="portal-intro" style="margin-bottom:0.8rem;">Acompanhe o <strong style="color:var(--navy);">PL 012/2025</strong> por e-mail.</p>
+          <div class="sapl-css">
+            <div class="sapl-titulo">Cadastro de Acompanhamento</div>
+            <div class="sapl-field">
+              <label>E-mail <span class="sapl-required">*</span></label>
+              <input type="email" placeholder="seu@email.com">
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.65rem 0.9rem;font-size:0.8rem;color:#166534;margin-bottom:0.75rem;">
+              ✓ Você receberá um e-mail de confirmação após o cadastro.
+            </div>
+            <button class="sapl-btn">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TABELA DE TRADEOFFS
+     ══════════════════════════════════════════════════════════ -->
+<section class="tradeoffs">
+  <h2>Comparativo de tradeoffs</h2>
+  <div class="trade-grid">
+    <div class="trade-card">
+      <h3>Critério</h3>
+      <ul>
+        <li data-icon="📐">Consistência visual</li>
+        <li data-icon="⏱">Tempo de implementação</li>
+        <li data-icon="🔧">Manutenção futura</li>
+        <li data-icon="📱">Mobile</li>
+        <li data-icon="♿">Acessibilidade</li>
+        <li data-icon="🔒">Segurança (CORS)</li>
+      </ul>
+    </div>
+    <div class="trade-card" style="border-top:3px solid var(--azul)">
+      <h3>1 — Redirect</h3>
+      <ul>
+        <li data-icon="△">Quebra — sai do portal</li>
+        <li data-icon="✓">1h por tela</li>
+        <li data-icon="✓">Zero — SAPL cuida</li>
+        <li data-icon="✓">Responsivo (SAPL)</li>
+        <li data-icon="✓">Herda do SAPL</li>
+        <li data-icon="✓">Sem problema</li>
+      </ul>
+    </div>
+    <div class="trade-card" style="border-top:3px solid #e07000">
+      <h3>2 — Iframe puro</h3>
+      <ul>
+        <li data-icon="✗">Feio — visual SAPL cru</li>
+        <li data-icon="✓">2h por tela</li>
+        <li data-icon="✓">Zero — SAPL cuida</li>
+        <li data-icon="△">Iframe não escala bem</li>
+        <li data-icon="△">Pode ter conflitos</li>
+        <li data-icon="△">Precisa same-origin</li>
+      </ul>
+    </div>
+    <div class="trade-card" style="border-top:3px solid #166534">
+      <h3>3 — Iframe + CSS</h3>
+      <ul>
+        <li data-icon="✓">Coerente com portal</li>
+        <li data-icon="△">1-2 dias por tela</li>
+        <li data-icon="✗">Frágil — SAPL mudou?</li>
+        <li data-icon="△">Iframe não escala bem</li>
+        <li data-icon="△">Pode ter conflitos</li>
+        <li data-icon="✗">Precisa proxy/same-origin</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1.2rem;font-size:0.85rem;color:var(--cinza);">
+    <strong style="color:var(--navy);">Recomendação para MVP:</strong> Abordagem 1 (redirect) para todas as telas de escrita do SAPL. Cuida do contexto no portal (explica o que é, pré-requisitos, próximos passos) e deixa o SAPL fazer o que ele faz bem. A abordagem 3 só vale se a câmara exigir visual 100% coeso e tiver infraestrutura same-origin.
+  </p>
+</section>
+
+</body>
+</html>

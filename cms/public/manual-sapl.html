@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual do SAPL — Como alimentar o sistema legislativo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1c1c1c;
+      background: #fff;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 2rem 2rem 1.75rem;
+    }
+    header h1 { font-size: 1.5rem; font-weight: 700; }
+    header p  { font-size: 0.9rem; color: #94b8d8; margin-top: 0.25rem; }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    nav.indice {
+      width: 240px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid #e5e7eb;
+      background: #f9fafb;
+      padding: 1.5rem 0 2rem;
+    }
+    nav.indice .indice-titulo {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      padding: 0 1.25rem 0.75rem;
+    }
+    nav.indice ol { list-style: none; }
+    nav.indice a {
+      display: block;
+      padding: 0.3rem 1.25rem;
+      font-size: 0.82rem;
+      color: #4b5563;
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color .12s, border-color .12s, background .12s;
+    }
+    nav.indice a:hover { color: #1a3a5c; background: #eef2f7; }
+    nav.indice a.ativo {
+      color: #1a3a5c;
+      font-weight: 600;
+      border-left-color: #2563a8;
+      background: #e8f0f8;
+    }
+
+    /* ── CONTEÚDO ── */
+    main {
+      flex: 1;
+      min-width: 0;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    /* ── SEÇÕES ── */
+    section { margin-top: 3.5rem; }
+    section:first-child { margin-top: 0; }
+
+    .section-header { margin-bottom: 1.25rem; }
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1a3a5c;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #dbeafe;
+    }
+    /* esconde o bloco de número emoji — agora o h2 já tem o número no texto */
+    .section-num { display: none; }
+
+    /* ── SUBSEÇÕES ── sem card, apenas h3 + conteúdo ── */
+    .subsection { margin-bottom: 2rem; }
+    .subsection-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .subsection-body { /* sem padding extra — flui normal */ }
+
+    /* ── PASSOS ── */
+    ol.passos { list-style: none; counter-reset: p; padding: 0; }
+    ol.passos li {
+      counter-increment: p;
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      align-items: flex-start;
+    }
+    ol.passos li::before {
+      content: counter(p);
+      min-width: 1.5rem;
+      height: 1.5rem;
+      background: #2563a8;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    ol.passos li p { margin: 0; }
+
+    /* ── TABELAS ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin: 0.75rem 0 1.25rem;
+    }
+    th {
+      background: #f1f5f9;
+      color: #374151;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 2px solid #cbd5e1;
+      text-align: left;
+    }
+    td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── CALLOUTS ── */
+    .dica, .atencao, .importante {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      margin: 0.875rem 0;
+      font-size: 0.875rem;
+      border-radius: 4px;
+      border-left: 3px solid;
+    }
+    .dica      { background: #f0fdf4; border-color: #22c55e; color: #166534; }
+    .atencao   { background: #fffbeb; border-color: #f59e0b; color: #78350f; }
+    .importante{ background: #fef2f2; border-color: #ef4444; color: #991b1b; }
+    .dica em, .atencao em, .importante em { font-style: normal; flex-shrink: 0; }
+
+    /* ── TAGS ── */
+    .tag { display: inline-block; font-size: 0.68rem; font-weight: 600;
+           padding: 0.1rem 0.45rem; border-radius: 3px; vertical-align: middle; }
+    .tag-obrig { background: #fee2e2; color: #b91c1c; }
+    .tag-opcl  { background: #f0fdf4; color: #166534; }
+
+    /* ── FLUXO ── */
+    .fluxo {
+      background: #0f172a;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 0.875rem 0;
+      overflow-x: auto;
+    }
+    .fluxo-grupo { margin-bottom: 1rem; }
+    .fluxo-grupo:last-child { margin-bottom: 0; }
+    .fluxo-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #475569;
+      margin-bottom: 0.4rem;
+    }
+    .fluxo-steps { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+    .fluxo-step {
+      background: #1e293b; color: #cbd5e1;
+      font-size: 0.78rem; padding: 0.3rem 0.7rem;
+      border-radius: 4px; border: 1px solid #334155;
+      white-space: nowrap;
+    }
+    .fluxo-step.verde  { background: #14532d; border-color: #166534; color: #86efac; }
+    .fluxo-step.azul   { background: #1e3a5f; border-color: #1d4ed8; color: #93c5fd; }
+    .fluxo-step.amarelo{ background: #451a03; border-color: #92400e; color: #fcd34d; }
+    .fluxo-arrow { color: #334155; padding: 0 0.1rem; font-size: 0.9rem; }
+
+    /* ── FAQ ── */
+    details { border-bottom: 1px solid #e5e7eb; }
+    details:first-child { border-top: 1px solid #e5e7eb; }
+    summary {
+      padding: 0.7rem 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1a3a5c;
+      user-select: none;
+    }
+    summary::before { content: '+'; font-size: 1rem; color: #6b7280; width: 1rem; flex-shrink: 0; }
+    details[open] summary::before { content: '−'; }
+    .faq-body { padding: 0.5rem 0 1rem 1.5rem; font-size: 0.875rem; color: #374151; }
+
+    /* ── CÓDIGO INLINE ── */
+    code {
+      font-family: 'Consolas', monospace;
+      font-size: 0.85em;
+      background: #f1f5f9;
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      color: #0f4c81;
+    }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 800px) {
+      nav.indice { display: none; }
+      main { padding: 1.5rem 1.25rem 3rem; max-width: 100%; }
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      nav.indice { display: none; }
+      .fluxo { background: #f1f5f9 !important; }
+      .fluxo-step { color: #1c1c1c !important; border-color: #cbd5e1 !important; background: #fff !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">SISTEMA LEGISLATIVO</div>
+  <h1>Manual do SAPL</h1>
+  <p>Guia completo para alimentar o sistema legislativo da Câmara</p>
+</header>
+
+<div class="page-body">
+<nav class="indice">
+  <div class="indice-titulo">Ir para seção</div>
+  <ol>
+    <li><a href="#s1">1. Conceitos Básicos</a></li>
+    <li><a href="#s2">2. Preparação</a></li>
+    <li><a href="#s3">3. Matérias Legislativas</a></li>
+    <li><a href="#s4">4. Protocolo Geral</a></li>
+    <li><a href="#s5">5. Sessões Plenárias</a></li>
+    <li><a href="#s6">6. Normas Jurídicas</a></li>
+    <li><a href="#s7">7. Comissões</a></li>
+    <li><a href="#s8">8. Mesa Diretora</a></li>
+    <li><a href="#s9">9. Vereadores</a></li>
+    <li><a href="#s10">10. Proposições Eletrônicas</a></li>
+    <li><a href="#s11">11. Tramitação em Lote</a></li>
+    <li><a href="#s12">12. Relatórios</a></li>
+    <li><a href="#s13">13. Fluxo Sessão Ordinária</a></li>
+    <li><a href="#s14">14. Fluxo Projeto de Lei</a></li>
+    <li><a href="#s15">15. Mudança de Fluxo</a></li>
+    <li><a href="#s16">16. O que NÃO entra no SAPL</a></li>
+    <li><a href="#s17">17. Dicas Rápidas</a></li>
+    <li><a href="#s18">18. Perguntas Frequentes</a></li>
+    <li><a href="#s19">19. Pesquisa Booleana</a></li>
+    <li><a href="#s20">20. Tabela LexML</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ===== SEÇÃO 1 ===== -->
+<section id="s1">
+  <div class="section-header">
+    <div class="section-num">📚</div>
+    <h2>1. Conceitos Básicos</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Glossário</div>
+    <div class="subsection-body">
+      <table>
+        <thead>
+          <tr><th>Termo</th><th>Definição</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>LEGISLATURA</strong></td><td>Período de 4 anos correspondente ao mandato dos vereadores eleitos. Ex: 20ª Legislatura (2025–2028).</td></tr>
+          <tr><td><strong>SESSÃO LEGISLATIVA</strong></td><td>Período anual de trabalhos da Câmara dentro de uma legislatura. Uma legislatura tem 4 sessões legislativas: 1ª = 2025, 2ª = 2026, 3ª = 2027, 4ª = 2028.</td></tr>
+          <tr><td><strong>SESSÃO PLENÁRIA</strong></td><td>Cada reunião do plenário num dia específico (ex.: sessão de 10/03/2025). <strong>Não confundir</strong> com Sessão Legislativa, que é o período anual.</td></tr>
+          <tr><td><strong>MATÉRIA LEGISLATIVA</strong></td><td>Qualquer documento em tramitação na Câmara: Projeto de Lei (PL), Requerimento (REQ), Indicação (IND), Moção (MOC), entre outros.</td></tr>
+          <tr><td><strong>NORMA JURÍDICA</strong></td><td>Resultado final aprovado e promulgado: lei, decreto, resolução etc. Só deve ser cadastrada <strong>depois</strong> de publicada no Diário Oficial.</td></tr>
+          <tr><td><strong>TRAMITAÇÃO</strong></td><td>Histórico de onde a matéria está e para onde vai. Cada passo do processo deve ser registrado cronologicamente no SAPL.</td></tr>
+          <tr><td><strong>PROTOCOLO</strong></td><td>Registro formal de entrada ou saída de documentos na Câmara. Gera um número de controle oficial.</td></tr>
+          <tr><td><strong>PROPOSIÇÃO</strong></td><td>Modo eletrônico pelo qual um parlamentar envia uma matéria diretamente no sistema, sem necessidade de papel.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="importante">
+        <em>🚨</em>
+        <div><strong>Regra de ouro:</strong> Se não entrou no SAPL, não aparece no site. O SAPL é o cofre dos registros oficiais. O site é a vitrine.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 2 ===== -->
+<section id="s2">
+  <div class="section-header">
+    <div class="section-num">⚙️</div>
+    <h2>2. Preparação</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">2.1 — Legislatura (a cada 4 anos)</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Parlamentares → Legislatura → Adicionar</strong>. Preencha os campos:</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Exemplo</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Número da Legislatura</td><td>20</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data de Início</td><td>01/01/2025</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data de Fim</td><td>31/12/2028</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data da Eleição</td><td>06/10/2024</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">2.2 — Sessão Legislativa (todo fevereiro)</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Sessão Plenária → Sessão Legislativa → Adicionar</strong>. Preencha:</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Valor</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Legislatura</td><td>Selecionar a legislatura atual</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Número</td><td>1 a 4 (conforme o ano na legislatura)</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Tipo</td><td>Ordinária</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data de Início</td><td>01/02/&lt;ano&gt;</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data de Fim</td><td>31/12/&lt;ano&gt;</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">2.3 — Tipos já cadastrados no sistema</div>
+    <div class="subsection-body">
+      <p>Os seguintes tipos já devem existir no SAPL antes de começar a alimentar matérias e sessões:</p>
+      <table>
+        <thead><tr><th>Categoria</th><th>Siglas</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tipos de Norma Jurídica</strong></td><td>DLE, RES, RME, LEI, LC, ELO, PORT</td></tr>
+          <tr><td><strong>Tipos de Matéria Legislativa</strong></td><td>PL, PLC, PDL, PRES, PELO, REQ, IND, MOC, VET, EMD, PIN, SUB</td></tr>
+          <tr><td><strong>Tipos de Sessão Plenária</strong></td><td>Ordinária, Extraordinária, Solene, Especial, Itinerante</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">2.4 — Tabelas auxiliares a verificar</div>
+    <div class="subsection-body">
+      <p>Antes de iniciar os cadastros, confirme que as seguintes tabelas estão configuradas em <strong>Tabelas Auxiliares</strong>:</p>
+      <ul style="list-style:disc;padding-left:1.5rem;line-height:2;">
+        <li>Órgão</li>
+        <li>Unidade de Tramitação</li>
+        <li>Status de Tramitação</li>
+        <li>Cargos da Mesa Diretora</li>
+        <li>Tipo de Comissão</li>
+        <li>Regime de Tramitação</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 3 ===== -->
+<section id="s3">
+  <div class="section-header">
+    <div class="section-num">📄</div>
+    <h2>3. Matérias Legislativas</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.1 — Cadastrar matéria</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Matéria → Matéria Legislativa → Adicionar</strong>.</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Orientação</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Tipo</td><td>PL, REQ, IND, MOC etc.</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Número</td><td>Sequencial por tipo e ano</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Ano</td><td>Ano de protocolo</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data de Apresentação</td><td>Data em que foi protocolada</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Ementa</td><td>Texto resumido do objeto</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Regime de Tramitação</td><td>Normal, Urgente, Urgência Urgentíssima</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Em tramitação</td><td>Marcar "Sim" enquanto em andamento</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Indexação</td><td>Palavras-chave para pesquisa</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+          <tr><td>Observação</td><td>Notas internas</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.2 — Anexar PDF (Texto Integral)</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Abra a matéria já cadastrada.</p></li>
+        <li><p>Acesse a aba <strong>Texto Integral</strong>.</p></li>
+        <li><p>Clique em <strong>Adicionar Texto Integral</strong>.</p></li>
+        <li><p>Selecione o arquivo PDF e clique em <strong>Salvar</strong>.</p></li>
+      </ol>
+      <div class="dica"><em>💡</em> <div>O PDF do texto integral é o que aparece para download no portal público. Sempre anexe o arquivo final assinado.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.3 — Autoria</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Na matéria, clique em <strong>Adicionar Autoria</strong>.</p></li>
+        <li><p>Selecione o tipo (Parlamentar, Comissão, Mesa, Poder Executivo).</p></li>
+        <li><p>Selecione o autor correspondente.</p></li>
+        <li><p>Atenção: o parlamentar precisa ter um <strong>mandato ativo</strong> no período para aparecer na lista.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.4 — Despacho inicial</div>
+    <div class="subsection-body">
+      <p>Após cadastrar a matéria, faça o despacho inicial para a comissão ou unidade responsável pela análise. Isso inicia o histórico de tramitação.</p>
+      <div class="atencao"><em>⚠️</em> <div>Sem despacho inicial, a matéria fica "parada" na entrada sem histórico visível no portal.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.5 — Tramitação</div>
+    <div class="subsection-body">
+      <p>Cada movimentação da matéria deve ser registrada. Acesse a aba <strong>Tramitação → Adicionar</strong>.</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Orientação</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Data da Ação</td><td>Data real do acontecimento</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Unidade Local</td><td>Onde a matéria estava</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Unidade Destino</td><td>Para onde vai</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Status</td><td>Ex.: Em análise, Aprovada, Arquivada</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Texto da Ação</td><td>Descrição do que aconteceu</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.6 — Legislação citada</div>
+    <div class="subsection-body">
+      <p>Use a aba <strong>Legislação Citada</strong> para vincular normas que a matéria menciona ou altera. Isso cria referência cruzada no portal.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.7 — Matéria anexada</div>
+    <div class="subsection-body">
+      <p>Use a aba <strong>Matéria Anexada</strong> para vincular matérias relacionadas (ex.: emenda a um projeto). Facilita a navegação no portal.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.8 — Relatoria</div>
+    <div class="subsection-body">
+      <p>Use a aba <strong>Relatoria</strong> para designar o vereador relator na comissão. Informe o parlamentar, a comissão e a data de designação.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.9 — Documentos acessórios</div>
+    <div class="subsection-body">
+      <p>Use a aba <strong>Documento Acessório</strong> para anexar pareceres de comissão, emendas, substitutivos ou qualquer documento que acompanhe a matéria sem ser o texto principal.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">3.10 — Numeração alternativa</div>
+    <div class="subsection-body">
+      <p>Quando a matéria recebe outro número em instância diferente (ex.: PLC originário de PL), use a aba <strong>Numeração</strong> para registrar a numeração alternativa sem alterar o número original.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 4 ===== -->
+<section id="s4">
+  <div class="section-header">
+    <div class="section-num">📬</div>
+    <h2>4. Protocolo Geral</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">4.1 — Protocolar documento</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Protocolo → Protocolar Documento</strong>. Campos principais:</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Orientação</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Tipo de Protocolo</td><td>Entrada ou Saída</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Natureza</td><td>Administrativo ou Legislativo</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Tipo de Documento</td><td>Ofício, Requerimento, Certidão etc.</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Interessado</td><td>Nome do remetente ou destinatário</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Assunto</td><td>Resumo do conteúdo</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">4.2 — Protocolar matéria</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Protocolo → Protocolar Matéria</strong> para associar o protocolo diretamente a uma matéria legislativa existente. Use quando o documento protocolado corresponde a uma matéria já cadastrada.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">4.3 — Pesquisar protocolos</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Protocolo → Pesquisar Protocolo</strong>. É possível combinar vários termos de busca.</p>
+      <div class="dica"><em>💡</em> <div>Use ponto-e-vírgula para separar múltiplos termos na pesquisa. Exemplo: <strong>ofício;2025;saúde</strong> retorna protocolos que contenham qualquer um desses termos.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">4.4 — Anular protocolo</div>
+    <div class="subsection-body">
+      <p>Use a anulação apenas para corrigir erros de cadastro. O número do protocolo fica <strong>reservado e registrado</strong> como anulado — nunca é reutilizado. Informe sempre a justificativa.</p>
+      <div class="atencao"><em>⚠️</em> <div>Não anule protocolos apenas para reordenar numeração. A anulação é para erros reais de registro.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 5 ===== -->
+<section id="s5">
+  <div class="section-header">
+    <div class="section-num">🏛️</div>
+    <h2>5. Sessões Plenárias</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.1 — Criar sessão (antes da sessão)</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Sessão Plenária → Sessão Plenária → Adicionar</strong>.</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Orientação</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Número</td><td>Sequencial no ano</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Tipo</td><td>Ordinária, Extraordinária etc.</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Legislatura</td><td>Legislatura atual</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Sessão Legislativa</td><td>Sessão do ano corrente</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data</td><td>Data da reunião</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Hora de Início</td><td>Horário previsto</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>URL Áudio/Vídeo</td><td>Link do YouTube ou similar</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.2 — Mesa da sessão</div>
+    <div class="subsection-body">
+      <p>Na sessão criada, acesse <strong>Mesa</strong> e registre quem preside e compõe a mesa naquele dia. Pode diferir da Mesa Diretora permanente se houver substituição.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.3 — Registrar presença</div>
+    <div class="subsection-body">
+      <p>Acesse a aba <strong>Presença</strong> e marque o checkbox de cada vereador presente. O sistema verifica automaticamente o quórum para votações.</p>
+      <div class="dica"><em>💡</em> <div>Registre as presenças antes de iniciar as votações para que o sistema calcule quórum corretamente.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.4 — Expediente</div>
+    <div class="subsection-body">
+      <p>Acesse a aba <strong>Expediente</strong>. Preencha as caixas de texto por parte (Abertura, Correspondências, Comunicados etc.).</p>
+      <div class="atencao"><em>⚠️</em> <div>Não cole texto diretamente do Word — formatações ocultas podem causar erros de exibição. Sempre cole no Bloco de Notas primeiro para limpar a formatação, depois transfira para o SAPL.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.5 — Matérias no Expediente</div>
+    <div class="subsection-body">
+      <p>Na aba <strong>Expediente → Matérias</strong>, inclua as matérias que serão lidas em plenário durante o Expediente. Pode adicionar individualmente ou várias de uma vez. Use os botões de seta para reordenar a sequência de apresentação.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.6 — Oradores no Expediente</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Expediente → Oradores</strong> para registrar a ordem de fala dos vereadores inscritos. É possível anexar o texto do discurso em PDF para cada orador.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.7 — Presença na Ordem do Dia</div>
+    <div class="subsection-body">
+      <p>Se houver intervalo entre Expediente e Ordem do Dia, atualize a presença na aba <strong>Ordem do Dia → Presença</strong>. Isso é necessário quando vereadores chegam ou saem entre as partes.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.8 — Matérias na Ordem do Dia</div>
+    <div class="subsection-body">
+      <p>Na aba <strong>Ordem do Dia</strong>, inclua as matérias que serão votadas. Defina a ordem de votação e use os botões de reordenação se necessário.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.9 — Registrar votação</div>
+    <div class="subsection-body">
+      <p>Na matéria em pauta, clique em <strong>Registrar Votação</strong>. Selecione o tipo:</p>
+      <ul style="list-style:disc;padding-left:1.5rem;line-height:2;">
+        <li><strong>Nominal:</strong> registra o voto individual de cada vereador (Sim, Não, Abstenção).</li>
+        <li><strong>Simbólica:</strong> registra apenas o resultado (Aprovada/Rejeitada) sem voto individual.</li>
+        <li><strong>Secreta:</strong> usada quando o regimento prevê sigilo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.10 — Explicações pessoais</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Expediente → Oradores (Após OD)</strong> ou a seção de Explicações Pessoais para registrar os vereadores que falam após a Ordem do Dia.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.11 — Fechar sessão</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Acesse a sessão e clique em <strong>Editar</strong>.</p></li>
+        <li><p>Informe a <strong>Hora de Fim</strong>.</p></li>
+        <li><p>Marque o campo <strong>Finalizada</strong> como "Sim".</p></li>
+        <li><p>Salve.</p></li>
+      </ol>
+      <div class="importante"><em>🚨</em> <div>Sessão não finalizada aparece no portal como "em andamento" indefinidamente. Sempre feche ao encerrar.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.12 — Anexar ata</div>
+    <div class="subsection-body">
+      <p>Após aprovação da ata em sessão posterior, acesse a sessão correspondente e use <strong>Upload Ata</strong> para anexar o PDF. O arquivo aparece no portal imediatamente após o upload.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">5.13 — Anexar Ordem do Dia e Expediente em PDF</div>
+    <div class="subsection-body">
+      <p>Para disponibilizar a pauta completa no portal antes da sessão, use <strong>Upload Pauta</strong> para anexar o PDF da Ordem do Dia e/ou do Expediente previamente preparado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 6 ===== -->
+<section id="s6">
+  <div class="section-header">
+    <div class="section-num">⚖️</div>
+    <h2>6. Normas Jurídicas</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">6.1 — Cadastrar norma</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Norma → Norma Jurídica → Adicionar</strong>. Preencha os campos:</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Orientação</th><th>Obrigatoriedade</th></tr></thead>
+        <tbody>
+          <tr><td>Tipo</td><td>LEI, LC, DLE, RES, RME, PORT, ELO</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Número</td><td>Número oficial da norma</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Ano</td><td>Ano de promulgação</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Esfera</td><td>Municipal</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Data</td><td>Data de publicação oficial</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Ementa</td><td>Texto oficial da ementa</td><td><span class="tag tag-obrig">obrig.</span></td></tr>
+          <tr><td>Indexação</td><td>Palavras-chave temáticas</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+          <tr><td>Equivalente LexML</td><td>Ver Seção 20 deste manual</td><td><span class="tag tag-opcl">opcional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">6.2 — Vincular à matéria de origem</div>
+    <div class="subsection-body">
+      <p>Na norma cadastrada, acesse a aba <strong>Norma Relacionada</strong> e vincule à matéria que deu origem à norma usando o tipo de relação <strong>"Originado de"</strong>. Isso cria o elo entre o processo legislativo e o resultado final.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">6.3 — Pesquisa de normas</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Norma → Pesquisar Norma</strong>. Utilize os filtros disponíveis:</p>
+      <ul style="list-style:disc;padding-left:1.5rem;line-height:2;">
+        <li>Tipo, Número, Ano, Data (intervalo).</li>
+        <li>Campo <strong>"Em vigência"</strong>: filtra apenas normas não revogadas.</li>
+        <li>Ordenação por data, tipo ou número.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 7 ===== -->
+<section id="s7">
+  <div class="section-header">
+    <div class="section-num">👥</div>
+    <h2>7. Comissões</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">7.1 — Pré-requisitos</div>
+    <div class="subsection-body">
+      <p>Antes de criar uma comissão, verifique que existem no SAPL:</p>
+      <ul style="list-style:disc;padding-left:1.5rem;line-height:2;">
+        <li>Tipo de Comissão (Permanente, Temporária, Especial…)</li>
+        <li>Período de composição definido</li>
+        <li>Parlamentares com mandato ativo</li>
+        <li>Cargos da comissão (Presidente, Vice-Presidente, Relator…)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">7.2 — Composição</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Acesse <strong>Comissão → Comissão → Adicionar</strong> e preencha nome, tipo e período.</p></li>
+        <li><p>Na comissão criada, acesse a aba <strong>Composição</strong>.</p></li>
+        <li><p>Adicione cada membro informando: parlamentar, cargo na comissão, data de início.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">7.3 — Reunião de comissão</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Comissão → Reunião de Comissão → Adicionar</strong>. Informe a comissão, data, hora, local e pauta. Após a reunião, registre a presença e o resultado das deliberações.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">7.4 — Inativar comissão</div>
+    <div class="subsection-body">
+      <p>Para encerrar uma comissão, edite o cadastro e informe a <strong>data de extinção</strong>. A comissão sai da lista de ativas mas continua no histórico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 8 ===== -->
+<section id="s8">
+  <div class="section-header">
+    <div class="section-num">🪑</div>
+    <h2>8. Mesa Diretora</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">8.1 — Atualizar a Mesa anualmente (ou após eleição interna)</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Parlamentares → Mesa Diretora → Composição da Mesa</strong>. Para cada cargo, informe:</p>
+      <ul style="list-style:disc;padding-left:1.5rem;line-height:2;">
+        <li>Cargo (Presidente, Vice-Presidente, 1º Secretário…)</li>
+        <li>Parlamentar designado</li>
+        <li>Data de início</li>
+        <li>id_ordenacao (Presidente = 1, Vice = 2 etc.) — controla a ordem de exibição no portal</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">8.2 — Diferença entre Mesa Diretora e Mesa da Sessão</div>
+    <div class="subsection-body">
+      <table>
+        <thead><tr><th>Mesa</th><th>O que é</th><th>Onde cadastrar</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Mesa Diretora</strong></td><td>Eleita anualmente. Representa a Câmara. Aparece no portal como composição oficial.</td><td>Parlamentares → Mesa Diretora</td></tr>
+          <tr><td><strong>Mesa da Sessão</strong></td><td>Quem presidiu aquela reunião específica. Pode variar por substituição.</td><td>Na própria sessão → aba Mesa</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 9 ===== -->
+<section id="s9">
+  <div class="section-header">
+    <div class="section-num">👤</div>
+    <h2>9. Vereadores — Afastamentos e Suplentes</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">9.1 — Afastar vereador titular</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Acesse o mandato do vereador titular em <strong>Parlamentares → Mandato</strong>.</p></li>
+        <li><p>Adicione um <strong>Afastamento</strong> com o tipo correspondente (licença médica, licença para cargo público etc.).</p></li>
+        <li><p>Informe data de início e motivo.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">9.2 — Convocar suplente</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Acesse <strong>Parlamentares → Mandato → Adicionar</strong> para o suplente.</p></li>
+        <li><p>Informe a legislatura e defina <strong>Titular = NÃO</strong>.</p></li>
+        <li><p>Informe a <strong>data de convocação</strong>.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">9.3 — Encerrar suplência</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Remova o afastamento do titular (edite e retire ou informe data de fim).</p></li>
+        <li><p>No mandato do suplente, informe a <strong>data de fim</strong> da suplência.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 10 ===== -->
+<section id="s10">
+  <div class="section-header">
+    <div class="section-num">💻</div>
+    <h2>10. Proposições Eletrônicas</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">10.1 — Configurar acesso do autor</div>
+    <div class="subsection-body">
+      <p>O parlamentar precisa ter um usuário vinculado ao seu perfil de autor no SAPL. Acesse <strong>Autores → Autor</strong> e associe o login ao parlamentar.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">10.2 — Envio pelo parlamentar</div>
+    <div class="subsection-body">
+      <p>O parlamentar acessa o SAPL com seu login e cria a proposição. O ciclo de estados é:</p>
+      <div class="fluxo">
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Ciclo de estados</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step">Em elaboração</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">Enviada</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">Recebida</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">10.3 — Recebimento pelo operador</div>
+    <div class="subsection-body">
+      <ol class="passos">
+        <li><p>Acesse <strong>Proposição → Receber Proposição</strong>.</p></li>
+        <li><p>Localize a proposição com status "Enviada".</p></li>
+        <li><p>Confirme com o <strong>código do recibo</strong> fornecido pelo parlamentar.</p></li>
+        <li><p>Clique em <strong>Criar Matéria</strong> para gerar a matéria legislativa correspondente.</p></li>
+      </ol>
+      <table>
+        <thead><tr><th>Filtro de busca</th><th>O que mostra</th></tr></thead>
+        <tbody>
+          <tr><td>Não Recebidas</td><td>Enviadas pelo parlamentar, aguardando confirmação</td></tr>
+          <tr><td>Não Incorporadas</td><td>Recebidas, mas ainda não transformadas em matéria</td></tr>
+          <tr><td>Incorporadas</td><td>Já vieram matéria — processo concluído</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 11 ===== -->
+<section id="s11">
+  <div class="section-header">
+    <div class="section-num">📦</div>
+    <h2>11. Tramitação em Lote</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Como tramitar várias matérias de uma vez</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Matéria → Tramitação em Lote</strong>.</p>
+      <ol class="passos">
+        <li><p><strong>Passo 1 — Pesquisar matérias:</strong> filtre por tipo de matéria, unidade local atual, status de tramitação ou marque "primeira tramitação" para buscar matérias sem nenhum histórico.</p></li>
+        <li><p><strong>Passo 2 — Selecionar:</strong> marque as matérias que devem receber a tramitação em lote.</p></li>
+        <li><p><strong>Passo 3 — Tramitar selecionadas:</strong> informe unidade destino, texto da ação, status, urgente (sim/não) e turno da votação, se aplicável.</p></li>
+        <li><p>Clique em <strong>Salvar</strong> — o SAPL registra a mesma tramitação em todas as matérias selecionadas simultaneamente.</p></li>
+      </ol>
+      <div class="dica"><em>💡</em> <div>Ideal para o início do ano legislativo: use "primeira tramitação" para localizar todos os projetos que ainda não foram despachados e enviá-los às comissões de uma vez.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 12 ===== -->
+<section id="s12">
+  <div class="section-header">
+    <div class="section-num">📊</div>
+    <h2>12. Relatórios</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">12.1 — Lista de atas</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Relatórios → Lista de Atas</strong>. Exibe as últimas 50 atas por padrão. Use o filtro de período (data inicial e final) ou pesquise por texto no conteúdo da ata.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">12.2 — Proposituras por tipo/autor/ano</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Relatórios → Proposituras</strong>. Filtre combinando tipo de matéria, autor e ano para gerar listagens específicas. Útil para relatórios de produtividade legislativa.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">12.3 — Proposituras por autor</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Relatórios → Proposituras por Autor</strong> para visualizar tudo que um parlamentar ou comissão apresentou num período.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">12.4 — Matérias em tramitação</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Relatórios → Matérias em Tramitação</strong>. O campo <strong>Ano</strong> é obrigatório. Retorna todas as matérias que ainda estão com "Em tramitação = Sim" no ano informado.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">12.5 — Histórico de tramitações</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Relatórios → Histórico de Tramitações</strong>. Respeite a ordem dos filtros: primeiro selecione a unidade, depois o status, depois o intervalo de datas. Filtros fora de ordem podem retornar resultados vazios.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">12.6 — Impressos (etiquetas e fichas)</div>
+    <div class="subsection-body">
+      <p>Acesse <strong>Relatórios → Impressos</strong> para gerar etiquetas de protocolo e fichas de tramitação em formato imprimível. Útil para controle físico de processos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 13 ===== -->
+<section id="s13">
+  <div class="section-header">
+    <div class="section-num">📅</div>
+    <h2>13. Fluxo — Sessão Ordinária</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Passo a passo completo</div>
+    <div class="subsection-body">
+      <div class="fluxo">
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Dia Anterior</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step azul">1. Criar sessão no SAPL</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">2. Incluir matérias na OD</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">3. Incluir matérias no Expediente</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">4. Upload Pauta (PDF)</span>
+          </div>
+        </div>
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Dia da Sessão</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step">5. Registrar presença (Expediente)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">6. Preencher texto do Expediente</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">7. Registrar oradores</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">8. Atualizar presença OD (se houver mudança)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step amarelo">9. Registrar votações</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step amarelo">10. Registrar explicações pessoais</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">11. Fechar sessão (hora fim + Finalizada = Sim)</span>
+          </div>
+        </div>
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Dias Seguintes</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step">12. Atualizar tramitação das matérias votadas</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">13. Upload Ata (após aprovação na sessão seguinte)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">14. Cadastrar normas geradas (leis, resoluções)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 14 ===== -->
+<section id="s14">
+  <div class="section-header">
+    <div class="section-num">📋</div>
+    <h2>14. Fluxo — Projeto de Lei</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Ciclo de vida completo</div>
+    <div class="subsection-body">
+      <div class="fluxo">
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Entrada</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step azul">1. Protocolar documento</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">2. Cadastrar matéria (tipo PL)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">3. Registrar autoria</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">4. Anexar PDF (Texto Integral)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step azul">5. Despacho inicial para comissão</span>
+          </div>
+        </div>
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Tramitação</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step">6. Tramitação → Em análise (comissão)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">7. Designar relator</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">8. Anexar parecer da comissão</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step">9. Tramitação → Aprovado em comissão</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step amarelo">10. Incluir na Ordem do Dia</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step amarelo">11. Registrar votação em plenário</span>
+          </div>
+        </div>
+        <div class="fluxo-grupo">
+          <div class="fluxo-label">Aprovação</div>
+          <div class="fluxo-steps">
+            <span class="fluxo-step verde">12. Tramitação → Aprovado em plenário</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">13. Tramitação → Enviado ao Executivo</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">14. Tramitação → Sancionado/Promulgado</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">15. Cadastrar norma jurídica (LEI Nº ...)</span>
+            <span class="fluxo-arrow">→</span>
+            <span class="fluxo-step verde">16. Vincular norma à matéria de origem</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 15 ===== -->
+<section id="s15">
+  <div class="section-header">
+    <div class="section-num">⚠️</div>
+    <h2>15. Mudança de Fluxo — OD / EXP / REQC / INDC</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Por que o fluxo mudou?</div>
+    <div class="subsection-body">
+      <div class="importante">
+        <em>🚨</em>
+        <div>Os procedimentos abaixo substituem práticas anteriores que eram <strong>workarounds</strong> — não estavam errados, mas foram superados pelo uso correto dos módulos do SAPL. Siga o fluxo atual daqui em diante.</div>
+      </div>
+      <table>
+        <thead><tr><th>Funcionalidade</th><th>Antes</th><th>Agora</th><th>Por quê mudou</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ordem do Dia</strong></td>
+            <td>Matérias eram incluídas manualmente como texto no campo OD</td>
+            <td>Usar aba "Matérias na Ordem do Dia" dentro da sessão</td>
+            <td>O módulo nativo vincula matéria ↔ votação corretamente</td>
+          </tr>
+          <tr>
+            <td><strong>Expediente</strong></td>
+            <td>Texto livre sem vinculação a matérias</td>
+            <td>Usar aba "Matérias no Expediente" para matérias lidas; texto livre só para o restante</td>
+            <td>Permite rastrear matérias apresentadas em expediente no histórico</td>
+          </tr>
+          <tr>
+            <td><strong>Requerimentos (REQC)</strong></td>
+            <td>Cadastrados como tipo genérico</td>
+            <td>Cadastrar com tipo específico REQ e regime correto</td>
+            <td>Relatórios e filtros funcionam por tipo; dado fica indexado</td>
+          </tr>
+          <tr>
+            <td><strong>Indicações (INDC)</strong></td>
+            <td>Cadastradas como texto no expediente</td>
+            <td>Cadastrar como matéria tipo IND, vincular à sessão via Expediente → Matérias</td>
+            <td>Aparece no portal público com tramitação e autoria visíveis</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="dica"><em>💡</em> <div><strong>Nota sobre histórico:</strong> não apague registros antigos criados pelo fluxo anterior. Mantenha como estão — apenas os novos registros devem seguir o fluxo atual.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 16 ===== -->
+<section id="s16">
+  <div class="section-header">
+    <div class="section-num">🚫</div>
+    <h2>16. O que NÃO entra no SAPL</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Documentos que pertencem a outros sistemas</div>
+    <div class="subsection-body">
+      <table>
+        <thead><tr><th>Documento</th><th>Por quê não entra no SAPL</th><th>Onde fica</th></tr></thead>
+        <tbody>
+          <tr><td>Notícias e comunicados</td><td>Conteúdo editorial, não legislativo</td><td>Payload CMS</td></tr>
+          <tr><td>Banners e fotos de eventos</td><td>Material de comunicação</td><td>Payload CMS</td></tr>
+          <tr><td>FAQ institucional</td><td>Conteúdo estático do portal</td><td>Payload CMS</td></tr>
+          <tr><td>Transparência financeira (orçamento, licitações)</td><td>Competência do Poder Executivo / órgão financeiro</td><td>Sistema da Prefeitura (link externo)</td></tr>
+          <tr><td>Contracheques e folha de pagamento</td><td>RH interno</td><td>Sistema de RH da Câmara</td></tr>
+          <tr><td>Informações de contato da Câmara</td><td>Identidade institucional</td><td>Payload CMS → Global Configurações</td></tr>
+          <tr><td>Regimento Interno (texto vigente)</td><td>Já publicado como norma — apenas link</td><td>SAPL (norma) + portal linka</td></tr>
+          <tr><td>Legislação federal e estadual</td><td>Fora do escopo municipal</td><td>Portais externos (Planalto, AL)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 17 ===== -->
+<section id="s17">
+  <div class="section-header">
+    <div class="section-num">⚡</div>
+    <h2>17. Dicas Rápidas</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Situações comuns e o que fazer</div>
+    <div class="subsection-body">
+      <table class="tabela-rapida">
+        <thead><tr><th>Situação</th><th>O que fazer</th></tr></thead>
+        <tbody>
+          <tr><td>Matéria não aparece no portal</td><td>Verificar se "Em tramitação" está marcado como Sim e se há texto integral anexado</td></tr>
+          <tr><td>Vereador não aparece como autor</td><td>Verificar se tem mandato ativo na legislatura/ano correto</td></tr>
+          <tr><td>Sessão aparece como "em andamento"</td><td>Editar sessão, informar hora de fim e marcar Finalizada = Sim</td></tr>
+          <tr><td>Número de matéria errado</td><td>Editar a matéria — o número pode ser corrigido enquanto não há dependências críticas</td></tr>
+          <tr><td>Preciso alterar tramitação já salva</td><td>Não edite — adicione nova tramitação corrigindo o status. O histórico é cronológico.</td></tr>
+          <tr><td>PDF não abre no portal</td><td>Verificar se o arquivo é um PDF válido (abrir localmente), resubmeter se necessário</td></tr>
+          <tr><td>Suplente aparece como titular</td><td>Verificar campo "Titular" no mandato — deve estar marcado como NÃO para suplentes</td></tr>
+          <tr><td>Norma não aparece na busca</td><td>Conferir se o tipo está certo e se o campo "Vigência" está correto</td></tr>
+          <tr><td>Comissão não aparece como ativa</td><td>Verificar data de extinção — se preenchida, a comissão está inativa</td></tr>
+          <tr><td>Dois projetos com mesmo número</td><td>Usar numeração alternativa para o segundo; nunca reutilize número no mesmo ano/tipo</td></tr>
+          <tr><td>Proposição enviada sumiu</td><td>Pesquisar em Proposições com filtro "Não Incorporadas" — pode estar recebida mas não criada como matéria</td></tr>
+          <tr><td>Votação registrada errada</td><td>Contate o administrador do sistema — votações finalizadas não podem ser editadas diretamente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 18 ===== -->
+<section id="s18">
+  <div class="section-header">
+    <div class="section-num">❓</div>
+    <h2>18. Perguntas Frequentes</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">FAQ</div>
+    <div class="subsection-body">
+
+      <details>
+        <summary>Preciso cadastrar todas as matérias antigas ou só as novas?</summary>
+        <div class="faq-body">
+          Depende do escopo do projeto. Para o portal público funcionar com transparência plena, o ideal é cadastrar pelo menos as matérias dos últimos 4 anos (legislatura atual). Matérias históricas podem ser importadas progressivamente. O importante é que nenhuma matéria nova seja omitida a partir da entrada em operação do sistema.
+        </div>
+      </details>
+
+      <details>
+        <summary>Posso usar o SAPL sem ter o portal público ativo?</summary>
+        <div class="faq-body">
+          Sim. O SAPL funciona de forma independente como sistema interno de gestão legislativa. O portal público consome os dados do SAPL, mas o SAPL não depende do portal para funcionar.
+        </div>
+      </details>
+
+      <details>
+        <summary>O que acontece se eu errar o tipo de uma matéria?</summary>
+        <div class="faq-body">
+          O tipo pode ser corrigido editando a matéria, desde que ela não tenha sido incluída em sessões ou votações. Se já tiver histórico de sessões, converse com o administrador antes de alterar — a correção pode impactar relatórios.
+        </div>
+      </details>
+
+      <details>
+        <summary>Onde fico para cadastrar lei aprovada: na matéria ou na norma?</summary>
+        <div class="faq-body">
+          Em <strong>ambos</strong>, de formas distintas. Na matéria: atualize a tramitação para "Promulgada/Sancionada". Em Norma Jurídica: cadastre a lei com número, data e ementa oficiais. Por fim, vincule a norma à matéria de origem usando Norma Relacionada.
+        </div>
+      </details>
+
+      <details>
+        <summary>Posso ter dois vereadores com o mesmo nome no sistema?</summary>
+        <div class="faq-body">
+          Sim, mas crie cada um com CPF diferente para evitar confusão. O sistema identifica cada parlamentar de forma única. Use o nome completo oficial para diferenciar quando necessário.
+        </div>
+      </details>
+
+      <details>
+        <summary>A ata precisa ser inserida antes de fechar a sessão?</summary>
+        <div class="faq-body">
+          Não. A ata normalmente é aprovada na sessão seguinte. Feche a sessão atual normalmente; adicione o upload da ata quando ela estiver oficialmente aprovada e assinada.
+        </div>
+      </details>
+
+      <details>
+        <summary>Quanto tempo tenho para registrar os dados após a sessão?</summary>
+        <div class="faq-body">
+          Não há prazo técnico no sistema, mas para conformidade com a LAI e o TCE-RS, o recomendado é registrar as tramitações e fechar a sessão em até <strong>48 horas</strong> após a realização. A ata pode aguardar a aprovação formal, mas o registro da votação deve ser imediato.
+        </div>
+      </details>
+
+      <details>
+        <summary>Posso excluir uma matéria cadastrada por engano?</summary>
+        <div class="faq-body">
+          Sim, desde que ela não tenha tramitações, sessões ou autores vinculados. Se já tiver dependências, a exclusão pode ser bloqueada pelo sistema. Nesse caso, arquive a matéria usando tramitação com status "Arquivada" e marque "Em tramitação = Não".
+        </div>
+      </details>
+
+      <details>
+        <summary>O que fazer quando um vereador assume interinamente a Presidência?</summary>
+        <div class="faq-body">
+          Registre na <strong>Mesa da Sessão</strong> (dentro de cada sessão plenária) quem presidiu aquela reunião específica. A Mesa Diretora permanente não precisa ser alterada para substituições temporárias. Se a substituição for prolongada (cargo público, licença médica), use o módulo de Afastamentos.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 19 ===== -->
+<section id="s19">
+  <div class="section-header">
+    <div class="section-num">🔍</div>
+    <h2>19. Pesquisa Booleana no SAPL</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Operadores de busca disponíveis</div>
+    <div class="subsection-body">
+      <p>O campo de pesquisa do SAPL usa sintaxe booleana. Dominar os operadores economiza muito tempo nas buscas.</p>
+      <table>
+        <thead><tr><th>Operador</th><th>Função</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td><code>+</code></td><td>Termo obrigatório (AND)</td><td><code>+saúde +criança</code> — ambos devem aparecer</td></tr>
+          <tr><td><code>-</code></td><td>Excluir termo</td><td><code>saúde -veterinária</code> — saúde, mas não veterinária</td></tr>
+          <tr><td>(sem sinal)</td><td>Termo opcional (OR implícito)</td><td><code>saúde educação</code> — qualquer um dos dois</td></tr>
+          <tr><td><code>( )</code></td><td>Agrupar termos</td><td><code>+(saúde educação) +2024</code></td></tr>
+          <tr><td><code>&gt;</code></td><td>Aumentar relevância</td><td><code>&gt;saúde educação</code></td></tr>
+          <tr><td><code>&lt;</code></td><td>Diminuir relevância</td><td><code>&lt;veterinária saúde</code></td></tr>
+          <tr><td><code>~</code></td><td>Operador de negação suave</td><td><code>~veterinária</code></td></tr>
+          <tr><td><code>*</code></td><td>Curinga (qualquer terminação)</td><td><code>educa*</code> → educação, educacional, educador…</td></tr>
+          <tr><td><code>"frase"</code></td><td>Busca por frase exata</td><td><code>"código de obras"</code></td></tr>
+          <tr><td><code>;</code></td><td>Múltiplos termos independentes</td><td><code>saúde;educação;transporte</code> — resultados de cada um</td></tr>
+        </tbody>
+      </table>
+      <div class="dica"><em>💡</em> <div>Use ponto-e-vírgula para buscar múltiplos termos em paralelo — o sistema retorna resultados de cada termo separadamente, ideal para relatórios amplos.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO 20 ===== -->
+<section id="s20">
+  <div class="section-header">
+    <div class="section-num">🌐</div>
+    <h2>20. Tabela LexML</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">O que é e por que preencher</div>
+    <div class="subsection-body">
+      <p>O <strong>LexML</strong> é o padrão brasileiro de identificação unívoca de normas jurídicas. Preencher o campo "Equivalente LexML" nas normas traz benefícios concretos:</p>
+      <ol style="list-style:decimal;padding-left:1.5rem;line-height:2.2;">
+        <li>Permite que a norma seja indexada no portal nacional LexML.gov.br.</li>
+        <li>Cria uma URI permanente e canônica para a norma — links nunca "quebram".</li>
+        <li>Facilita interoperabilidade com outros sistemas públicos.</li>
+        <li>Melhora a visibilidade em buscadores quando o portal cita a norma.</li>
+        <li>Atende recomendações do Interlegis para câmaras municipais.</li>
+        <li>Simplifica pesquisas cruzadas entre normas de diferentes esferas.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-header">Equivalentes LexML por tipo de norma</div>
+    <div class="subsection-body">
+      <table>
+        <thead><tr><th>Tipo no SAPL</th><th>Equivalente LexML</th></tr></thead>
+        <tbody>
+          <tr><td>LEI — Lei Ordinária</td><td>lei.ordinaria</td></tr>
+          <tr><td>LC — Lei Complementar</td><td>lei.complementar</td></tr>
+          <tr><td>DLE — Decreto Legislativo</td><td>decreto.legislativo</td></tr>
+          <tr><td>RES — Resolução</td><td>resolucao</td></tr>
+          <tr><td>RME — Resolução da Mesa</td><td>resolucao.mesa</td></tr>
+          <tr><td>PORT — Portaria</td><td>portaria</td></tr>
+          <tr><td>ELO — Emenda à Lei Orgânica</td><td>emenda.lei.organica</td></tr>
+          <tr><td>Ato da Mesa</td><td>ato.mesa</td></tr>
+          <tr><td>Instrução Normativa</td><td>instrucao.normativa</td></tr>
+          <tr><td>Regimento Interno</td><td>regimento.interno</td></tr>
+          <tr><td>Lei Orgânica</td><td>lei.organica</td></tr>
+        </tbody>
+      </table>
+      <div class="dica"><em>💡</em> <div><strong>Como preencher no SAPL:</strong> ao cadastrar ou editar uma norma, localize o campo "Equivalente LexML" e informe exatamente o valor da coluna direita da tabela acima (em minúsculas, sem espaços). Não é obrigatório, mas é altamente recomendado para todas as normas novas.</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div><!-- /.page-body -->
+
+<footer style="text-align:center;padding:2rem;color:#9ca3af;font-size:0.8rem;">
+  SAPL — Sistema de Apoio ao Processo Legislativo · Interlegis/Câmara dos Deputados
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('nav.indice a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.remove('ativo'));
+        const active = document.querySelector('nav.indice a[href="#' + e.target.id + '"]');
+        if (active) active.classList.add('ativo');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

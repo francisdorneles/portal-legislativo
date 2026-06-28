@@ -1,0 +1,1304 @@
+/* Pílulas de placar (compartilhadas) */
+.vp {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.vp-sim {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.vp-nao {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.vp-abst {
+  background: #eef2f7;
+  color: #475569;
+}
+
+/* Vínculo projeto↔lei e placar na página da matéria */
+.resultado-lei {
+  background: var(--gelo);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 0.8rem 1.1rem;
+}
+
+.votacao-placar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.votacao-placar .v-sim {
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.votacao-placar .v-nao {
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.votacao-placar .v-abs {
+  background: #eef2f7;
+  color: #475569;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+/* Links de documentos da audiência */
+.audiencia-docs {
+  display: flex;
+  gap: 0.8rem;
+  margin: 0.5rem 0 0;
+}
+
+.audiencia-docs a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--azul);
+}
+
+/* Pareceres das comissões (página da matéria) */
+.pareceres {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+/* Espaçamento consistente entre seções da matéria */
+.votacao-materia {
+  margin-bottom: 1.4rem;
+}
+
+.pareceres li {
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  background: #fff;
+}
+
+.parecer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.parecer-head strong {
+  color: var(--navy);
+}
+
+.parecer-relator {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--cinza);
+  margin-top: 0.2rem;
+}
+
+.parecer-texto {
+  margin: 0.5rem 0 0;
+  font-size: 0.92rem;
+}
+
+/* Relações entre normas (altera/revoga/regulamenta/correlata) */
+.relacoes {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.relacoes li {
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  background: #fff;
+}
+
+.relacao-rotulo {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 800;
+  color: var(--azul);
+  margin-bottom: 0.3rem;
+}
+
+.relacao-norma {
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.relacao-norma:hover {
+  text-decoration: underline;
+}
+
+.relacao-ementa {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+.relacao-resumo {
+  margin: 0.4rem 0 0;
+  font-size: 0.86rem;
+  font-style: italic;
+}
+
+/* Oradores das sessões (tribuna: expediente e ordem do dia) */
+.oradores-grupo {
+  margin: 0 0 1.5rem;
+}
+
+.oradores-fase {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cinza);
+  font-weight: 800;
+  margin: 0 0 0.6rem;
+}
+
+.oradores {
+  list-style: none;
+  counter-reset: orador;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.oradores li {
+  counter-increment: orador;
+  position: relative;
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 0.8rem 1rem 0.8rem 2.6rem;
+  background: #fff;
+}
+
+.oradores li::before {
+  content: counter(orador);
+  position: absolute;
+  left: 0.8rem;
+  top: 0.8rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-items: center;
+  background: var(--gelo);
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.orador-nome {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.orador-nome:hover {
+  text-decoration: underline;
+}
+
+.orador-tema {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+.orador-video {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--azul);
+  text-decoration: none;
+}
+
+.orador-video:hover {
+  text-decoration: underline;
+}
+
+/* Painel eletrônico ao vivo */
+.painel-live {
+  border: 1px solid var(--linha);
+  border-radius: 16px;
+  padding: 1.4rem 1.6rem;
+  background: var(--navy);
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.painel-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.painel-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.painel-status--on {
+  color: #ff5b5b;
+}
+
+.painel-status--off {
+  color: var(--cinza);
+  background: var(--gelo);
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+}
+
+.painel-pulso {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #ff5b5b;
+  box-shadow: 0 0 0 0 rgba(255, 91, 91, 0.7);
+  animation: painel-pulso 1.4s infinite;
+}
+
+@keyframes painel-pulso {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 91, 91, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 0.6rem rgba(255, 91, 91, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 91, 91, 0);
+  }
+}
+
+.painel-atualizado {
+  font-size: 0.8rem;
+  color: #bcccdf;
+}
+
+.painel-sessao {
+  font-family: var(--font-archivo);
+  font-weight: 800;
+  font-size: 1.8rem;
+  margin: 0.8rem 0 1rem;
+  color: #fff;
+  border: 0;
+  padding: 0;
+}
+
+.painel-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .painel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.painel-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(91, 155, 255, 0.4);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+
+.painel-card-rotulo {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 800;
+}
+
+.painel-materia {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.painel-materia:hover {
+  text-decoration: underline;
+}
+
+.painel-ementa {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: #bcccdf;
+}
+
+.painel-numeros {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.painel-num {
+  text-align: center;
+}
+
+.painel-num strong {
+  display: block;
+  font-family: var(--font-archivo);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--amarelo);
+  line-height: 1;
+}
+
+.painel-num span {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #bcccdf;
+}
+
+.painel-vazio {
+  border: 1px dashed var(--linha);
+  border-radius: 16px;
+  padding: 2rem 1.6rem;
+  text-align: center;
+  margin-top: 1rem;
+  background: var(--gelo);
+}
+
+.painel-vazio-dica {
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+/* Agenda oficial (sessões + audiências) */
+.agenda {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.agenda li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  background: #fff;
+}
+
+.agenda li.passado {
+  opacity: 0.6;
+  border-left-color: var(--linha);
+}
+
+.agenda-data {
+  min-width: 6.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.agenda-data strong {
+  font-family: var(--font-archivo);
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.agenda-data span {
+  font-size: 0.82rem;
+  color: var(--cinza);
+  font-weight: 600;
+}
+
+.agenda-corpo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.agenda-titulo {
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.agenda-titulo:hover {
+  text-decoration: underline;
+}
+
+.badge-azul {
+  background: #e7eefb;
+  color: var(--azul);
+  border: 1px solid #c3d6f5;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.badge-am {
+  background: #fff4cc;
+  color: #8a6d00;
+  border: 1px solid #f2dd8a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Organograma (estrutura administrativa) */
+.organograma {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.org-nivel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  position: relative;
+  padding-top: 1.2rem;
+}
+
+.org-nivel:first-child {
+  padding-top: 0;
+}
+
+.org-nivel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 1.2rem;
+  background: var(--linha);
+}
+
+.org-nivel:first-child::before {
+  display: none;
+}
+
+.org-nivel-titulo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cinza);
+  font-weight: 800;
+  margin: 0;
+  border: 0;
+}
+
+.org-caixas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.org-caixa {
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-top: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  min-width: 13rem;
+  max-width: 20rem;
+  text-align: center;
+}
+
+.org-nivel--mesa .org-caixa {
+  border-top-color: var(--amarelo);
+  background: var(--gelo);
+}
+
+.org-caixa strong {
+  display: block;
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.org-resp {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--azul);
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.org-comp {
+  margin: 0.5rem 0 0;
+  font-size: 0.84rem;
+  color: var(--cinza);
+  text-align: left;
+}
+
+/* Acervo de vídeos */
+.videos {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.2rem;
+}
+
+.video-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-sem-thumb {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--amarelo);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.video-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 31, 61, 0.78);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  padding-left: 0.15rem;
+}
+
+.video-thumb:hover .video-play {
+  background: var(--azul);
+}
+
+.video-info {
+  margin-top: 0.5rem;
+}
+
+.video-data {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--cinza);
+  font-weight: 600;
+}
+
+.video-titulo {
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.video-titulo:hover {
+  text-decoration: underline;
+}
+
+/* Linha de votação na página da matéria */
+.vot-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.8rem;
+}
+
+/* Painel de votação (sessão) */
+.votacao {
+  margin-top: 0.7rem;
+}
+
+.votacao>summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.7rem;
+  background: var(--gelo);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.votacao>summary:hover {
+  background: #eaf1fb;
+  border-color: var(--azul);
+}
+
+.votacao>summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Rótulo-afordância que muda conforme aberto/fechado */
+.vot-toggle {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--azul);
+  white-space: nowrap;
+}
+
+.vot-toggle::after {
+  content: 'Ver votos ▾';
+}
+
+.votacao[open]>summary .vot-toggle::after {
+  content: 'Ocultar votos ▴';
+}
+
+.vot-presentes {
+  margin-left: auto;
+}
+
+.vot-turno {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--azul);
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.vot-resultado {
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.vot-placar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.vot-presentes {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cinza);
+  background: var(--gelo);
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.votos-legenda {
+  margin: 0.9rem 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--cinza);
+}
+
+.votos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 1rem;
+}
+
+.voto-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.2rem;
+  border-bottom: 1px solid var(--linha);
+}
+.voto-row .voto-nome { flex: 1; overflow: hidden; }
+
+.votos-grid .voto-nome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  transform: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  min-width: 0;
+}
+
+.votos-grid .voto-nome:hover {
+  text-decoration: underline;
+  box-shadow: none;
+  transform: none;
+}
+
+.voto-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.voto-sim {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.voto-nao {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.voto-abst {
+  background: #eef2f7;
+  color: #475569;
+}
+
+.voto-outro {
+  background: var(--gelo);
+  color: var(--cinza);
+}
+
+@media (max-width: 560px) {
+  .votos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Indicadores (KPIs) — relatório LAI */
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.4rem 0;
+}
+
+.indicador {
+  background: var(--gelo);
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.indicador strong {
+  display: block;
+  font-family: var(--font-archivo);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--navy);
+}
+
+.indicador span {
+  font-size: 0.82rem;
+  color: var(--cinza);
+}
+
+@media (max-width: 620px) {
+  .indicadores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Linha do tempo de tramitação (página da matéria) */
+.tramitacao {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  border-left: 2px solid var(--linha);
+}
+
+.tramitacao li {
+  position: relative;
+  padding: 0 0 1.3rem 1.4rem;
+}
+
+.tramitacao li::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--azul);
+  border: 2px solid #fff;
+}
+
+.tramitacao li:first-child::before {
+  background: var(--amarelo);
+}
+
+.tram-data {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cinza);
+}
+
+.tram-corpo {
+  margin-top: 0.15rem;
+}
+
+.tram-status {
+  display: block;
+  color: var(--navy);
+}
+
+.tram-texto {
+  margin: 0.2rem 0 0;
+  color: var(--cinza);
+  font-size: 0.92rem;
+}
+
+/* Destaque de próxima sessão (lista /sessoes) */
+.sessao-proxima {
+  padding: 1.2rem 1.4rem;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: inherit;
+  border-color: var(--azul);
+  margin: 1.4rem 0;
+  transition: box-shadow 0.15s;
+}
+
+.sessao-proxima:hover {
+  box-shadow: 0 12px 28px -18px rgba(8, 31, 61, 0.45);
+}
+
+.sessao-proxima .badge {
+  align-self: flex-start;
+}
+
+.sessao-proxima strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+/* Busca inline (páginas legislativas) */
+.busca-inline {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 1.2rem 0 1.5rem;
+  max-width: 600px;
+}
+
+.busca-inline input {
+  flex: 1;
+  min-width: 220px;
+  border: 1.5px solid var(--linha);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font: inherit;
+}
+
+/* (.busca-inline input:focus → primitivo único em 01-base.css) */
+
+/* Lista de matérias legislativas */
+.materias {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.materias a {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+  transition: 0.15s;
+}
+
+.materias a:hover {
+  box-shadow: 0 12px 26px -18px rgba(8, 31, 61, 0.5);
+  transform: translateY(-2px);
+  border-left-color: var(--amarelo);
+}
+
+.materia-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.materia-id {
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+.materia-ementa {
+  margin: 0.5rem 0 0.4rem;
+  color: var(--tinta);
+}
+
+.materia-data {
+  font-size: 0.82rem;
+  color: var(--cinza);
+  font-weight: 600;
+}
+
+/* Respiro uniforme abaixo do cabeçalho do item (título + badge) antes da ementa.
+   Aplicado na linha toda — não no badge — pra título e badge ganharem o mesmo
+   espaço (margin-bottom no badge num flex centralizado só empurra o badge). */
+.materias .materia-top {
+  margin-bottom: 1rem;
+}
+
+.ficha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin: 1.4rem 0;
+  padding: 1rem 1.2rem;
+  background: var(--gelo);
+  border-radius: 10px;
+}
+
+.ficha dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cinza);
+  font-weight: 700;
+}
+
+.ficha dd {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+}
+
+/* Barra de busca padrão das listas (texto + período) — inputs com mesma altura */
+.busca-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.6rem;
+  margin: 1rem 0 1.1rem;
+}
+
+.busca-filtros input {
+  border: 1.5px solid var(--linha);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.busca-filtros .bf-texto {
+  flex: 1 1 13rem;
+  max-width: 20rem;
+}
+
+.busca-filtros .bf-data {
+  width: 10rem;
+  color: var(--tinta);
+}
+
+.busca-filtros .btn {
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+
+.busca-filtros input:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(42, 111, 219, 0.15);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.chip {
+  background: var(--gelo);
+  border: 1px solid var(--linha);
+  border-radius: 99px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--tinta);
+}
+
+.chip:hover {
+  border-color: var(--azul);
+  color: var(--azul);
+}
+
+.chip.on {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.chip.on:hover {
+  color: #fff;
+}
+
+/* Blocos de comissões */
+.lista-blocos {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.bloco {
+  background: var(--gelo);
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 1.6rem;
+}
+
+.bloco-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.bloco-head h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.badge {
+  background: var(--navy);
+  color: var(--amarelo);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.membros {
+  color: var(--cinza);
+  font-size: 0.95rem;
+}
+
+/* ── Plenário e Reuniões na home: painel cinza + abas + cards (SAPL) ──── */
+.home-sessoes {
+  background: var(--gelo);
+  border-radius: 22px;
+  padding: 2rem;
+}
+
+.ses-tabs {
+  display: inline-flex;
+  gap: 0.3rem;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 99px;
+  padding: 0.3rem;
+  margin-bottom: 1.4rem;
+}
+
+.ses-tabs > * {
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: var(--cinza);
+  padding: 0.45rem 1rem;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.ses-tabs > a:hover {
+  color: var(--navy);
+  background: var(--gelo);
+}
+
+.ses-tabs .on {
+  color: #fff;
+  background: var(--navy);
+}
+
+.sessoes-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+
+.sessao-card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.sessao-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--azul);
+  box-shadow: 0 16px 34px -24px rgba(8, 31, 61, 0.4);
+}
+
+.sessao-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.sessao-card__st {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.sessao-card__st.live {
+  background: rgba(226, 59, 78, 0.12);
+  color: #c2304a;
+}
+
+.sessao-card__st.prox {
+  background: var(--gelo);
+  color: var(--cinza);
+  border: 1px solid var(--linha);
+}
+
+.sessao-card__st.feita {
+  background: #e9f7f0;
+  color: #16774f;
+}
+
+.sessao-card__cal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.sessao-card__cal svg {
+  color: var(--azul);
+}
+
+.sessao-card h3 {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.sessao-card__h {
+  font-size: 0.82rem;
+  color: var(--cinza);
+  margin-top: 0.2rem;
+}
+
+.sessao-card__go {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--azul);
+}
+
+@media (max-width: 900px) {
+  .sessoes-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .sessoes-cards {
+    grid-template-columns: 1fr;
+  }
+}
+

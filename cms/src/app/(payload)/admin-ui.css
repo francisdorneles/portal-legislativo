@@ -1,0 +1,38 @@
+/*
+ * Tailwind utilities para o admin do Payload.
+ * Importa APENAS utilities — sem preflight/reset para não quebrar o CSS do portal público.
+ * Variáveis shadcn escopadas a .adm para isolamento total.
+ */
+@import "tailwindcss/utilities";
+
+@source "../../components/admin/**";
+
+/* ── Variáveis shadcn escopadas ao admin ─────────────────────────────── */
+.adm {
+  --background: 244 247 251;        /* #f4f7fb */
+  --foreground: 26 39 64;           /* #1a2740 */
+  --card: 255 255 255;
+  --card-foreground: 26 39 64;
+  --popover: 255 255 255;
+  --popover-foreground: 26 39 64;
+  --primary: 8 31 61;               /* #081f3d navy */
+  --primary-foreground: 255 255 255;
+  --secondary: 238 242 247;         /* #eef2f7 */
+  --secondary-foreground: 26 39 64;
+  --muted: 244 247 251;
+  --muted-foreground: 107 135 168;  /* #6b87a8 */
+  --accent: 255 206 58;             /* #ffce3a amarelo */
+  --accent-foreground: 8 31 61;
+  --destructive: 220 38 38;
+  --destructive-foreground: 255 255 255;
+  --border: 220 229 240;            /* #dce5f0 */
+  --input: 220 229 240;
+  --ring: 42 111 219;               /* #2a6fdb azul */
+  --radius: 0.5rem;
+
+  /* success / warning para badges */
+  --success: 22 163 74;
+  --success-foreground: 255 255 255;
+  --warning: 217 119 6;
+  --warning-foreground: 255 255 255;
+}

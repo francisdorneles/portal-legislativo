@@ -1,0 +1,627 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Admin Payload — identidade visual da Câmara Municipal de Lajeado
+   Paleta: navy #081f3d · azul #2a6fdb · amarelo #ffce3a · gelo #f4f7fb
+═══════════════════════════════════════════════════════════════════ */
+
+/* ── Variáveis do tema Payload (light) ────────────────────────── */
+[data-theme="light"],
+:root {
+  --theme-bg:              #f4f7fb;
+  --theme-elevation-0:     #ffffff;
+  --theme-elevation-50:    #f4f7fb;
+  --theme-elevation-100:   #eef2f7;
+  --theme-elevation-150:   #e6ecf4;
+  --theme-elevation-200:   #dce5f0;
+  --theme-elevation-500:   #c8d5e8;
+  --theme-elevation-800:   #9fb3cc;
+  --theme-elevation-1000:  #6b87a8;
+
+  --theme-text:            #1a2740;
+  --theme-border-color:    #dce5f0;
+  --color-base-0:          #ffffff;
+  --color-base-50:         #f4f7fb;
+  --color-base-100:        #eef2f7;
+  --color-base-200:        #dce5f0;
+  --color-base-300:        #c8d5e8;
+  --color-base-500:        #6b87a8;
+  --color-base-700:        #2a4a6b;
+  --color-base-850:        #0f2d52;
+  --color-base-900:        #081f3d;
+  --color-base-1000:       #040f1e;
+
+  --color-success-500:     #16a34a;
+  --color-error-500:       #dc2626;
+  --color-warning-500:     #d97706;
+}
+
+/* ── Botões ───────────────────────────────────────────────────── */
+/* todos os botões — remove wrapper cinza e sombra */
+.btn {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.btn .btn__content {
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  padding: 0.65rem 1.25rem !important;
+}
+
+/* Primary (salvar, confirmar) */
+.btn--style-primary .btn__content {
+  background: #081f3d;
+  color: #fff;
+}
+.btn--style-primary:hover .btn__content {
+  background: #0f2d52;
+}
+
+/* Secondary (cancelar, voltar) */
+.btn--style-secondary .btn__content {
+  background: transparent;
+  border: 1.5px solid #dce5f0;
+  color: #1a2740;
+}
+.btn--style-secondary:hover .btn__content {
+  border-color: #2a6fdb;
+  color: #2a6fdb;
+  background: transparent;
+}
+
+/* Pill → mantém levemente arredondado mas não oval */
+.btn--style-pill .btn__content {
+  background: #eef2f7;
+  color: #1a2740;
+  border-radius: 7px !important;
+}
+.btn--style-pill:hover .btn__content {
+  background: #dce5f0;
+}
+
+/* Botão de salvar (canto superior direito) */
+.doc-controls__controls .btn--style-primary .btn__content {
+  background: #2a6fdb;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+.doc-controls__controls .btn--style-primary:hover .btn__content {
+  background: #1d5bbf;
+}
+
+/* ── Inputs, Textarea, Select ─────────────────────────────────── */
+.field-type input[type="text"],
+.field-type input[type="email"],
+.field-type input[type="password"],
+.field-type input[type="number"],
+.field-type input[type="url"],
+.field-type textarea,
+.field-type select,
+.rs__control {
+  background: #ffffff !important;
+  border: 1.5px solid #dce5f0 !important;
+  border-radius: 7px !important;
+  color: #1a2740 !important;
+  transition: border-color 0.15s;
+}
+
+.field-type input:focus,
+.field-type textarea:focus,
+.field-type select:focus,
+.rs__control--is-focused {
+  border-color: #2a6fdb !important;
+  box-shadow: 0 0 0 3px rgba(42, 111, 219, 0.12) !important;
+  outline: none !important;
+}
+
+/* Labels dos campos */
+.field-label,
+.field-type > label,
+.label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #1a2740;
+}
+
+/* Descrição auxiliar dos campos */
+.field-description {
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+
+/* ── Checkbox e Toggle ────────────────────────────────────────── */
+.checkbox-input__icon-container {
+  border-color: #dce5f0;
+  border-radius: 5px;
+}
+input[type="checkbox"]:checked + .checkbox-input__icon-container,
+.checkbox-input--checked .checkbox-input__icon-container {
+  background: #081f3d;
+  border-color: #081f3d;
+}
+
+/* ── Select customizado (react-select) ───────────────────────── */
+.rs__option--is-focused {
+  background: #eef2f7 !important;
+}
+.rs__option--is-selected {
+  background: #081f3d !important;
+}
+.rs__multi-value {
+  background: #eef2f7;
+  border-radius: 5px;
+}
+
+/* ── Sidebar / Nav ────────────────────────────────────────────── */
+.nav {
+  background: #081f3d !important;
+}
+.nav__wrap {
+  background: #081f3d !important;
+}
+
+/* Links do nav */
+.nav__link,
+.nav__link span {
+  color: #b8ccdf !important;
+}
+.nav__link:hover,
+.nav__link:hover span {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Item ativo */
+.nav__link--active,
+.nav__link--active span {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-left: 3px solid #ffce3a;
+}
+
+/* Grupos de coleções no nav */
+.nav__group-label {
+  color: #6b87a8 !important;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Botão de logout / conta no rodapé do nav */
+.nav__footer,
+.nav__footer button,
+.nav__footer a,
+.nav__footer svg,
+.account,
+.account button,
+.account svg {
+  color: #b8ccdf !important;
+  fill: #b8ccdf !important;
+}
+.nav__footer button:hover,
+.nav__footer a:hover,
+.account button:hover {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+/* ── App header (barra do topo) ──────────────────────────────── */
+.app-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #dce5f0 !important;
+}
+
+/* ── Login ────────────────────────────────────────────────────── */
+.login {
+  background: #f4f7fb;
+}
+.login__wrap {
+  background: #ffffff;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(8, 31, 61, 0.08);
+}
+/* inputs dentro do login — todos os seletores possíveis */
+.login input,
+.login .input-wrap input,
+.login .input-wrap__input,
+.login .field-type input {
+  background: #ffffff !important;
+  border: 1.5px solid #dce5f0 !important;
+  border-radius: 7px !important;
+  color: #1a2740 !important;
+}
+.login input:focus,
+.login .input-wrap input:focus {
+  border-color: #2a6fdb !important;
+  box-shadow: 0 0 0 3px rgba(42,111,219,0.12) !important;
+  outline: none !important;
+}
+/* wrapper do input que pode ter fundo cinza */
+.login .input-wrap,
+.login .field-type__wrap {
+  background: transparent !important;
+}
+/* botão de login — largura total */
+.login .btn {
+  width: 100% !important;
+}
+.login .btn .btn__content {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 0.8rem 1.25rem !important;
+}
+
+/* ── Cards / painéis de conteúdo ─────────────────────────────── */
+.render-fields,
+.collection-list__wrap,
+.document-fields {
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+/* Collapsible (seções dobráveis nos forms) */
+.collapsible__content {
+  border: 1.5px solid #dce5f0;
+  border-radius: 0 0 8px 8px;
+}
+.collapsible__toggle {
+  background: #f4f7fb;
+  border: 1.5px solid #dce5f0;
+  border-radius: 8px;
+}
+.collapsible--collapsed .collapsible__toggle {
+  border-radius: 8px;
+}
+
+/* ── Tabela de listagem (collection list) ────────────────────── */
+.table th {
+  background: #f4f7fb;
+  color: #1a2740;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #dce5f0;
+}
+.table tr:hover td {
+  background: #f4f7fb;
+}
+.table td {
+  border-bottom: 1px solid #eef2f7;
+}
+
+/* ── Paginação ────────────────────────────────────────────────── */
+.pagination .btn--style-primary .btn__content {
+  background: #081f3d;
+}
+
+/* ── Editor Lexical — toolbar ────────────────────────────────── */
+.toolbar-popup__button,
+.toolbar-popup__button svg,
+.floating-select-toolbar-popup__button,
+.floating-select-toolbar-popup__button svg,
+[class*="toolbar"] button,
+[class*="toolbar"] button svg,
+[class*="toolbar"] span,
+[class*="toolbar"] select {
+  color: #1a2740 !important;
+  fill: #1a2740 !important;
+}
+
+[class*="toolbar"] button:hover {
+  background: #eef2f7 !important;
+  color: #081f3d !important;
+}
+
+[class*="toolbar"] button[aria-pressed="true"],
+[class*="toolbar"] button.active {
+  background: #dce5f0 !important;
+  color: #081f3d !important;
+}
+
+/* dropdown do toolbar (headings, etc.) */
+[class*="toolbar"] select option,
+[class*="dropdown"] button,
+[class*="dropdown"] span {
+  color: #1a2740 !important;
+}
+
+/* ── Notificações / toasts ───────────────────────────────────── */
+.payload-toast-item--success {
+  border-left: 4px solid #16a34a;
+}
+.payload-toast-item--error {
+  border-left: 4px solid #dc2626;
+}
+
+/* ── Dashboard customizado ───────────────────────────────────── */
+.adm-dash {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+}
+
+.adm-dash__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.adm-dash__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a2740;
+  margin: 0;
+}
+
+.adm-dash__subtitle {
+  font-size: 11px;
+  color: #6b87a8;
+  margin: 0.15rem 0 0;
+}
+
+.adm-btn-portal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  background: #ffce3a;
+  color: #081f3d;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+  &:hover { opacity: 0.85; }
+}
+
+/* grade de stat cards */
+.adm-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.adm-stat {
+  background: #fff;
+  border: 1.5px solid #dce5f0;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:hover {
+    border-color: #2a6fdb;
+    box-shadow: 0 2px 8px rgba(42, 111, 219, 0.1);
+  }
+
+  &--warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  &--success {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+}
+
+.adm-stat__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b87a8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+
+  .adm-stat--warning & { color: #92400e; }
+  .adm-stat--success & { color: #166534; }
+}
+
+.adm-stat__valor {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a2740;
+  line-height: 1;
+
+  .adm-stat--warning & { color: #78350f; }
+  .adm-stat--success & { color: #14532d; }
+}
+
+.adm-stat__desc {
+  font-size: 0.7rem;
+  color: #6b87a8;
+  margin-top: 0.25rem;
+}
+
+/* alerta de pendências */
+.adm-alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #fffbeb;
+  border: 1.5px solid #fde68a;
+  border-radius: 10px;
+}
+
+.adm-alerta__texto {
+  flex: 1;
+}
+
+.adm-alerta__titulo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #78350f;
+  margin: 0;
+}
+
+.adm-alerta__sub {
+  font-size: 0.75rem;
+  color: #92400e;
+  margin: 0.2rem 0 0;
+}
+
+.adm-alerta__link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #92400e;
+  text-decoration: underline;
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* card de últimas notícias */
+.adm-card {
+  background: #fff;
+  border: 1.5px solid #dce5f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.adm-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.adm-card__titulo {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1a2740;
+  margin: 0;
+}
+
+.adm-card__acao {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2a6fdb;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.adm-noticias {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.adm-noticias__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #eef2f7;
+  &:last-child { border-bottom: none; }
+}
+
+.adm-noticias__esq {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.adm-noticias__titulo {
+  font-size: 0.82rem;
+  color: #1a2740;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40ch;
+}
+
+.adm-noticias__dir {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.adm-noticias__data {
+  font-size: 0.72rem;
+  color: #6b87a8;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.adm-noticias__editar {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #2a6fdb;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.adm-vazio {
+  padding: 1rem;
+  font-size: 0.82rem;
+  color: #6b87a8;
+}
+
+/* badge de status */
+.adm-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  white-space: nowrap;
+
+  &--pub {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  &--rascunho {
+    background: #f1f5f9;
+    color: #475569;
+  }
+}
+
+/* atalhos rápidos */
+.adm-atalhos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.adm-atalho {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  background: #fff;
+  border: 1.5px solid #dce5f0;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1a2740;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+
+  &:hover {
+    border-color: #2a6fdb;
+    color: #2a6fdb;
+  }
+}

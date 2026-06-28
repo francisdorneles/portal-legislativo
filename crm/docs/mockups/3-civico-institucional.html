@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mockup 3 — Cívico (Institucional)</title>
+<style>
+  /* ============ Direção 3: "CÍVICO" — Institucional, nav horizontal (portal de gabinete) ============ */
+  :root{
+    --bg:#f4f6f8; --surface:#ffffff; --ink:#13243a; --muted:#5b6b7e; --line:#e3e8ee;
+    --navy:#0c2c4f; --navy-2:#103a66; --brand:#0b6e99; --accent:#c98a1a; --accent-soft:#fdf4e3;
+    --green:#177245; --amber:#b4690e; --red:#c0392b; --blue:#1d4ed8; --violet:#6d28d9;
+    --r:14px;
+    --shadow-sm:0 1px 2px rgba(12,44,79,.06);
+    --shadow-md:0 6px 18px rgba(12,44,79,.10), 0 2px 5px rgba(12,44,79,.06);
+    --shadow-lg:0 16px 44px rgba(12,44,79,.16);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5}
+  .num{font-variant-numeric:tabular-nums}
+  h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.01em}
+  p,li,.desc{text-wrap:pretty}
+  button{font:inherit;cursor:pointer;border:none;background:none}
+  a{color:inherit;text-decoration:none}
+
+  /* faixa institucional */
+  .band{background:linear-gradient(180deg,var(--navy-2),var(--navy));color:#eaf1f8}
+  .band .inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px 28px}
+  .band .logo{width:42px;height:42px;border-radius:11px;background:#fff;display:grid;place-items:center;color:var(--navy);font-weight:800;font-size:18px;box-shadow:var(--shadow-md)}
+  .band b{font-size:16px;letter-spacing:-.01em;color:#fff}.band small{display:block;color:#9db6d2;font-size:11.5px}
+  .band .gab{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .band .gab .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 13px;font-size:12.5px;color:#dbe7f3}
+  .band .av{width:38px;height:38px;border-radius:50%;background:#1b4b7d;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+
+  /* nav horizontal */
+  .navbar{background:var(--navy);border-top:1px solid rgba(255,255,255,.06)}
+  .navbar .inner{max-width:1180px;margin:0 auto;display:flex;gap:4px;padding:0 20px}
+  .navbar a{position:relative;display:flex;align-items:center;gap:9px;min-height:48px;padding:0 16px;color:#a9c0d8;font-weight:500;font-size:13.5px;
+    transition:color 150ms ease-out,background-color 150ms}
+  .navbar a .ic{width:17px;height:17px;opacity:.9}
+  .navbar a:hover{color:#fff;background:rgba(255,255,255,.05)}
+  .navbar a.active{color:#fff}
+  .navbar a.active::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--accent)}
+  .navbar a .badge{background:rgba(255,255,255,.14);border-radius:999px;padding:1px 8px;font-size:11.5px;font-weight:600}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 28px 56px}
+
+  .hero{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+  .hero h1{font-size:23px}.hero p{margin:5px 0 0;color:var(--muted);font-size:13.5px}
+  .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:11px;font-weight:600;font-size:13.5px;
+    transition-property:transform,background-color,box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow-md)}
+  .btn-primary:hover{background:#0a5d82}
+  .btn-accent{background:var(--accent);color:#3a2a06;box-shadow:var(--shadow-md)}
+  .btn-accent:hover{filter:brightness(1.04)}
+
+  .grid{display:grid;gap:16px}
+  .kpis{grid-template-columns:repeat(4,1fr);margin-bottom:18px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm)}
+  .kpi{padding:18px 20px;display:flex;flex-direction:column;gap:7px;border-top:3px solid transparent;transition:box-shadow 180ms ease-out,transform 180ms}
+  .kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+  .kpi.k1{border-top-color:var(--brand)}.kpi.k2{border-top-color:var(--amber)}.kpi.k3{border-top-color:var(--green)}.kpi.k4{border-top-color:var(--violet)}
+  .kpi .lbl{color:var(--muted);font-size:12.5px;font-weight:500}
+  .kpi .v{font-size:29px;font-weight:800;letter-spacing:-.02em;line-height:1}
+  .kpi .sub{font-size:12px;font-weight:600;color:var(--green)}
+
+  .cols{grid-template-columns:1.45fr 1fr;margin-bottom:18px}
+  .ph{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .ph h3{font-size:15px}.ph a{color:var(--brand);font-size:12.5px;font-weight:600}
+  .pb{padding:18px 20px}
+
+  .bar{display:flex;height:13px;border-radius:7px;overflow:hidden;margin:6px 0 14px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap}
+  .legend span{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12.5px}.legend b{color:var(--ink)}
+  .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .mini{display:flex;gap:10px;margin-top:16px}
+  .mini .b{flex:1;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fbfcfd}
+  .mini .b .t{font-size:12px;color:var(--muted)}.mini .b .n{font-weight:700;font-size:17px;margin-top:2px}
+
+  .disp{display:flex;flex-direction:column;gap:11px}
+  .drow{display:flex;align-items:center;gap:11px;font-size:13px}
+  .square{width:30px;height:22px;border-radius:5px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+  .drow b{margin-left:auto}
+  .note{margin-top:6px;font-size:12.5px;color:var(--muted);background:var(--accent-soft);border:1px solid #f0e0bd;border-radius:11px;padding:12px}
+
+  table{width:100%;border-collapse:collapse}
+  thead th{text-align:left;color:var(--muted);font-size:11.5px;font-weight:700;letter-spacing:.02em;padding:11px 20px;background:#f7f9fb;border-bottom:1px solid var(--line)}
+  tbody td{padding:13px 20px;border-bottom:1px solid #eef2f6;font-size:13px}
+  tbody tr{transition:background-color 130ms ease-out}
+  tbody tr:hover{background:#f7f9fb}
+  tbody tr:last-child td{border-bottom:none}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;border-radius:6px;padding:3px 9px}
+  .t-aberta{background:#fbeede;color:var(--amber)}.t-and{background:#e6eeff;color:var(--blue)}.t-res{background:#e2f3e9;color:var(--green)}.t-enc{background:#efe7fb;color:var(--violet)}
+  .who{display:flex;align-items:center;gap:9px}
+  .av-sm{width:27px;height:27px;border-radius:50%;background:#e8edf2;display:grid;place-items:center;font-size:11px;font-weight:600;color:#5b6b7e}
+  .foot{color:var(--muted);font-size:12px;text-align:center;padding-top:10px}
+</style>
+</head>
+<body>
+  <div class="band">
+    <div class="inner">
+      <div class="logo">R</div>
+      <div><b>Radar — Inteligência de Mandato</b><small>Câmara Municipal de Taquari/RS</small></div>
+      <div class="gab">
+        <span class="pill">Mandato 2025–2028</span>
+        <div class="av">LF</div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar">
+    <div class="inner">
+      <a class="active" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>Visão geral</a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>Cidadãos<span class="badge num">1.248</span></a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8M4 12v7h16"/></svg>Demandas<span class="badge num">37</span></a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>Radar</a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h7l5 5v13H7z"/></svg>Prestação de contas</a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H7l-3 3z"/></svg>Disparo</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="hero">
+      <div><h1>Visão geral do gabinete</h1><p>Resumo do mandato em Taquari · atualizado hoje, 16h</p></div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/></svg>Mapa de disputa</button>
+        <button class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Nova demanda</button>
+      </div>
+    </div>
+
+    <section class="grid kpis">
+      <div class="card kpi k1"><span class="lbl">Cidadãos na base</span><span class="v num">1.248</span><span class="sub num">▲ 4,2% no mês</span></div>
+      <div class="card kpi k2"><span class="lbl">Demandas abertas</span><span class="v num">37</span><span class="sub num" style="color:var(--amber)">6 novas hoje</span></div>
+      <div class="card kpi k3"><span class="lbl">Resolvidas no mês</span><span class="v num">18</span><span class="sub num">▲ 28%</span></div>
+      <div class="card kpi k4"><span class="lbl">Bairros no radar</span><span class="v num">17</span><span class="sub num" style="color:var(--muted)">12 com polígono</span></div>
+    </section>
+
+    <section class="grid cols">
+      <div class="card">
+        <div class="ph"><h3>Termômetro de relacionamento</h3><a href="#">Ver base →</a></div>
+        <div class="pb">
+          <div class="bar"><i style="width:25%;background:var(--green)"></i><i style="width:43%;background:#dd9b2b"></i><i style="width:32%;background:#9fb0c2"></i></div>
+          <div class="legend">
+            <span><span class="dot" style="background:var(--green)"></span>Quentes <b class="num">312</b></span>
+            <span><span class="dot" style="background:#dd9b2b"></span>Esfriando <b class="num">540</b></span>
+            <span><span class="dot" style="background:#9fb0c2"></span>Frios <b class="num">396</b></span>
+          </div>
+          <div class="mini">
+            <div class="b"><div class="t">⚠️ Cutuca de hoje</div><div class="n num">8 contatos</div></div>
+            <div class="b"><div class="t">🎂 Aniversariantes</div><div class="n num">3 hoje</div></div>
+            <div class="b"><div class="t">📨 Retornos</div><div class="n num">5 enviados</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ph"><h3>Mapa de disputa</h3><a href="#">Abrir →</a></div>
+        <div class="pb disp">
+          <div class="drow"><span class="square" style="background:var(--green)"></span>Meu território<b class="num">3</b></div>
+          <div class="drow"><span class="square" style="background:var(--amber)"></span>Em disputa<b class="num">4</b></div>
+          <div class="drow"><span class="square" style="background:var(--red)"></span>Do rival<b class="num">10</b></div>
+          <div class="note desc">🎯 <b>Centro</b> é o maior colégio e está <b>disputável</b> (você tem 62% do líder). É onde concentrar presença.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="ph"><h3>Demandas recentes</h3><a href="#">Todas as demandas →</a></div>
+      <table>
+        <thead><tr><th>Demanda</th><th>Bairro</th><th>Cidadão</th><th>Tema</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><b>Praça sem manutenção</b></td><td>Centro</td><td><span class="who"><span class="av-sm">MO</span>Maria Oliveira</span></td><td>praças</td><td><span class="tag t-res">● Resolvida</span></td></tr>
+          <tr><td><b>Poste sem luz</b></td><td>São João</td><td><span class="who"><span class="av-sm">JP</span>João Pereira</span></td><td>iluminação</td><td><span class="tag t-res">● Resolvida</span></td></tr>
+          <tr><td><b>Buraco na via</b></td><td>Centro</td><td><span class="who"><span class="av-sm">AS</span>Ana Souza</span></td><td>asfalto</td><td><span class="tag t-aberta">● Aberta</span></td></tr>
+          <tr><td><b>Reforma da escola</b></td><td>Léo Alvim Faller</td><td><span class="who"><span class="av-sm">—</span>—</span></td><td>educação</td><td><span class="tag t-enc">● Encaminhada</span></td></tr>
+          <tr><td><b>Coleta de lixo irregular</b></td><td>São João</td><td><span class="who"><span class="av-sm">MO</span>Maria Oliveira</span></td><td>limpeza</td><td><span class="tag t-and">● Em andamento</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="foot">Mockup — Direção “Cívico” (institucional) · dados ilustrativos de Taquari/RS</div>
+  </div>
+</body>
+</html>

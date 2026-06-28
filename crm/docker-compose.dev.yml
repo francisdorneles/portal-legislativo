@@ -1,0 +1,28 @@
+# Postgres (com pgvector) + Redis de desenvolvimento para o CRM.
+# Subir:    docker compose -f docker-compose.dev.yml up -d
+# Derrubar: docker compose -f docker-compose.dev.yml down
+# Porta 5434 para não colidir com o portal (5433).
+# name fixo: mantém os volumes estáveis mesmo se a pasta for renomeada.
+name: crm-legislativo
+services:
+  crmdb:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: crm
+      POSTGRES_PASSWORD: crm
+      POSTGRES_DB: crm_legislativo
+    ports:
+      - "5434:5432"
+    volumes:
+      - crm_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crm"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  crmredis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+volumes:
+  crm_pgdata:

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mockup 2 — Lumen (Light Premium)</title>
+<style>
+  /* ============ Direção 2: "LUMEN" — Light premium, arejado (Stripe/Notion) ============ */
+  :root{
+    --bg:#fbfbfa; --surface:#ffffff; --ink:#1a1a1a; --muted:#6b7280; --soft:#9aa1ab; --line:#ededec;
+    --brand:#0f766e; --brand-2:#0d9488; --brand-soft:#effaf7;
+    --green:#0f766e; --amber:#c2700a; --red:#dc2626; --blue:#2563eb; --violet:#7c3aed;
+    --r:18px; --r-in:12px;
+    --shadow-sm:0 1px 2px rgba(16,24,40,.04);
+    --shadow-md:0 2px 6px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.05);
+    --shadow-lg:0 12px 40px rgba(16,24,40,.10);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5}
+  .num{font-variant-numeric:tabular-nums}
+  h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.02em}
+  p,li,.desc{text-wrap:pretty}
+  button{font:inherit;cursor:pointer;border:none;background:none}
+  a{color:inherit;text-decoration:none}
+
+  .app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+
+  /* sidebar (clara) */
+  .side{background:var(--bg);border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+  .brand{display:flex;align-items:center;gap:11px;padding:4px 8px 18px}
+  .brand .logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(150deg,var(--brand-2),var(--brand));display:grid;place-items:center;color:#fff;font-weight:700;box-shadow:var(--shadow-md)}
+  .brand b{font-size:15.5px;letter-spacing:-.02em}.brand small{display:block;color:var(--soft);font-size:11.5px}
+  .navlabel{color:var(--soft);font-size:11px;font-weight:600;letter-spacing:.04em;padding:16px 10px 6px}
+  .nav a{display:flex;align-items:center;gap:11px;min-height:42px;padding:0 12px;border-radius:12px;color:#3f4651;font-weight:500;
+    transition-property:background-color,color;transition-duration:150ms;transition-timing-function:ease-out}
+  .nav a .ic{width:18px;height:18px;color:var(--soft);flex:none;transition:color 150ms}
+  .nav a:hover{background:#f3f3f1}
+  .nav a.active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm),inset 0 0 0 1px var(--line);font-weight:600}
+  .nav a.active .ic{color:var(--brand)}
+  .nav a .badge{margin-left:auto;color:var(--soft);font-size:12px;font-weight:600}
+  .me{margin-top:auto;display:flex;align-items:center;gap:10px;padding:8px;border-radius:14px}
+  .me:hover{background:#f3f3f1}
+  .me .av{width:36px;height:36px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:700;font-size:13px;box-shadow:inset 0 0 0 1px rgba(15,118,110,.15)}
+  .me b{font-size:13px}.me small{color:var(--soft);font-size:11.5px}
+
+  /* main */
+  .main{min-width:0;display:flex;flex-direction:column}
+  .top{display:flex;align-items:flex-end;gap:14px;padding:30px 40px 14px}
+  .top .ttl h1{font-size:26px}
+  .top .ttl p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+  .top .actions{margin-left:auto;display:flex;gap:10px}
+  .btn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 17px;border-radius:12px;font-weight:600;font-size:13.5px;
+    transition-property:transform,background-color,box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow-md)}
+  .btn-primary:hover{background:var(--brand-2)}
+  .btn-ghost{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+  .btn-ghost:hover{box-shadow:inset 0 0 0 1px #dcdcda,var(--shadow-sm)}
+
+  .content{padding:14px 40px 56px;display:flex;flex-direction:column;gap:22px}
+  .card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow-md);border:1px solid rgba(0,0,0,.015)}
+  .grid{display:grid;gap:18px}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .kpi{padding:20px 22px;display:flex;flex-direction:column;gap:8px;transition:transform 200ms ease-out,box-shadow 200ms}
+  .kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .kpi .lbl{color:var(--muted);font-size:13px;font-weight:500}
+  .kpi .v{font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .kpi .chip{align-self:flex-start;font-size:11.5px;font-weight:600;border-radius:999px;padding:3px 9px;background:var(--brand-soft);color:var(--brand)}
+  .kpi .chip.warn{background:#fdf3e7;color:var(--amber)}
+
+  .cols{grid-template-columns:1.4fr 1fr}
+  .ph{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 6px}
+  .ph h3{font-size:16px}.ph a{color:var(--brand);font-size:13px;font-weight:600}
+  .pb{padding:6px 22px 22px}
+
+  .bar{display:flex;height:14px;border-radius:999px;overflow:hidden;margin:8px 0 16px;gap:3px}
+  .bar i{display:block;border-radius:999px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap}
+  .legend span{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+  .legend b{color:var(--ink)}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .mini{display:flex;gap:12px;margin-top:18px}
+  .mini .b{flex:1;border-radius:var(--r-in);padding:14px;background:#fafafa;border:1px solid var(--line)}
+  .mini .b .t{font-size:12.5px;color:var(--muted)}.mini .b .n{font-weight:700;font-size:18px;margin-top:2px}
+
+  .disp{display:flex;flex-direction:column;gap:12px}
+  .drow{display:flex;align-items:center;gap:12px}
+  .pill{font-size:11.5px;font-weight:700;color:#fff;border-radius:999px;padding:3px 11px}
+  .barline{flex:1;height:8px;border-radius:999px;background:#f1f1ef;overflow:hidden}
+  .barline i{display:block;height:100%;border-radius:999px}
+
+  table{width:100%;border-collapse:collapse}
+  thead th{text-align:left;color:var(--soft);font-size:11.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:8px 22px}
+  tbody td{padding:14px 22px;border-top:1px solid var(--line);font-size:13.5px}
+  tbody tr{transition:background-color 140ms ease-out}
+  tbody tr:hover{background:#fafafa}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 11px}
+  .t-aberta{background:#fdf3e7;color:var(--amber)}.t-and{background:#eef4ff;color:var(--blue)}.t-res{background:var(--brand-soft);color:var(--brand)}.t-enc{background:#f4eefe;color:var(--violet)}
+  .who{display:flex;align-items:center;gap:9px}
+  .av-sm{width:28px;height:28px;border-radius:50%;background:#f0efed;display:grid;place-items:center;font-size:11px;font-weight:600;color:#6b7280}
+  .foot{color:var(--soft);font-size:12px;text-align:center;padding-top:8px}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">R</div><div><b>Radar</b><small>Inteligência de Mandato</small></div></div>
+    <div class="navlabel">Gabinete</div>
+    <nav class="nav">
+      <a class="active" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>Visão geral</a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>Cidadãos<span class="badge num">1.248</span></a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3 8-8M4 12v7h16"/></svg>Demandas<span class="badge num">37</span></a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>Radar</a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v5h5M7 3h7l5 5v13H7z"/></svg>Prestação de contas</a>
+    </nav>
+    <div class="navlabel">Ações</div>
+    <nav class="nav">
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H7l-3 3z"/></svg>Disparo</a>
+      <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13H7z"/></svg>Documentos</a>
+    </nav>
+    <div class="me"><div class="av">LF</div><div><b>Ver. Luciano F.</b><small>Taquari/RS</small></div></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="ttl"><h1>Bom dia, vereador 👋</h1><p>Aqui está o pulso do seu gabinete em Taquari hoje.</p></div>
+      <div class="actions">
+        <button class="btn btn-ghost"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>Radar</button>
+        <button class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Nova demanda</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="grid kpis">
+        <div class="card kpi"><span class="lbl">Cidadãos na base</span><span class="v num">1.248</span><span class="chip num">▲ 4,2% no mês</span></div>
+        <div class="card kpi"><span class="lbl">Demandas abertas</span><span class="v num">37</span><span class="chip warn num">6 novas hoje</span></div>
+        <div class="card kpi"><span class="lbl">Resolvidas no mês</span><span class="v num">18</span><span class="chip num">▲ 28%</span></div>
+        <div class="card kpi"><span class="lbl">Bairros no radar</span><span class="v num">17</span><span class="chip num">12 com polígono</span></div>
+      </section>
+
+      <section class="grid cols">
+        <div class="card">
+          <div class="ph"><h3>Termômetro de relacionamento</h3><a href="#">Ver base →</a></div>
+          <div class="pb">
+            <div class="bar"><i style="width:25%;background:var(--brand)"></i><i style="width:43%;background:#f0a93b"></i><i style="width:32%;background:#cbd2da"></i></div>
+            <div class="legend">
+              <span><span class="dot" style="background:var(--brand)"></span>Quentes <b class="num">312</b></span>
+              <span><span class="dot" style="background:#f0a93b"></span>Esfriando <b class="num">540</b></span>
+              <span><span class="dot" style="background:#cbd2da"></span>Frios <b class="num">396</b></span>
+            </div>
+            <div class="mini">
+              <div class="b"><div class="t">⚠️ Cutuca de hoje</div><div class="n num">8 contatos</div></div>
+              <div class="b"><div class="t">🎂 Aniversariantes</div><div class="n num">3 hoje</div></div>
+              <div class="b"><div class="t">📨 Retornos enviados</div><div class="n num">5</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ph"><h3>Mapa de disputa</h3><a href="#">Abrir →</a></div>
+          <div class="pb disp">
+            <div class="drow"><span class="pill" style="background:var(--brand)">Meu</span><div class="barline"><i style="width:18%;background:var(--brand)"></i></div><b class="num">3</b></div>
+            <div class="drow"><span class="pill" style="background:var(--amber)">Disputa</span><div class="barline"><i style="width:24%;background:var(--amber)"></i></div><b class="num">4</b></div>
+            <div class="drow"><span class="pill" style="background:var(--red)">Rival</span><div class="barline"><i style="width:59%;background:var(--red)"></i></div><b class="num">10</b></div>
+            <div class="desc" style="margin-top:6px;font-size:13px;color:var(--muted);background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:13px">
+              🎯 <b>Centro</b> é o maior colégio e está <b>disputável</b> — você tem 62% do líder. Priorize presença lá esta semana.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="ph"><h3>Demandas recentes</h3><a href="#">Todas →</a></div>
+        <table>
+          <thead><tr><th>Demanda</th><th>Bairro</th><th>Cidadão</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>Praça sem manutenção</b></td><td>Centro</td><td><span class="who"><span class="av-sm">MO</span>Maria Oliveira</span></td><td><span class="tag t-res">● Resolvida</span></td></tr>
+            <tr><td><b>Poste sem luz</b></td><td>São João</td><td><span class="who"><span class="av-sm">JP</span>João Pereira</span></td><td><span class="tag t-res">● Resolvida</span></td></tr>
+            <tr><td><b>Buraco na via</b></td><td>Centro</td><td><span class="who"><span class="av-sm">AS</span>Ana Souza</span></td><td><span class="tag t-aberta">● Aberta</span></td></tr>
+            <tr><td><b>Reforma da escola</b></td><td>Léo Alvim Faller</td><td><span class="who"><span class="av-sm">—</span>—</span></td><td><span class="tag t-enc">● Encaminhada</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+      <div class="foot">Mockup — Direção “Lumen” (light premium) · dados ilustrativos de Taquari/RS</div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

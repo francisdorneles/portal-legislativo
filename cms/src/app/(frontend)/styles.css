@@ -1,0 +1,21 @@
+/* Índice do design system do portal público.
+ *
+ * O CSS foi quebrado por domínio em ./estilos/* (antes era um único arquivo de
+ * ~3 mil linhas — a "colcha de retalhos"). A ORDEM dos @import abaixo é a mesma
+ * ordem original das regras, então o cascade é idêntico ao de antes.
+ *
+ * - 01-base                 variáveis (:root, incl. --leitura), reset, foco, motion
+ * - 02-cabecalho-nav        barra util, header, menu principal e dropdowns
+ * - 03-home                 hero, busca legislativa, notícias da home
+ * - 04-legislativo          matéria, votação, painel, agenda, organograma, vídeos, listas
+ * - 05-acessibilidade-cidadao   controles a11y, /gestao, FAQ, formulários, LGPD
+ * - 06-conteudo-rodape      rodapé, prosa/artigo (espinha), vereadores, comissões
+ * - 07-perfil-parlamentar   card de perfil do vereador (foto, abas, dossiê, comissões)
+ */
+@import './estilos/01-base.css';
+@import './estilos/02-cabecalho-nav.css';
+@import './estilos/03-home.css';
+@import './estilos/04-legislativo.css';
+@import './estilos/05-acessibilidade-cidadao.css';
+@import './estilos/06-conteudo-rodape.css';
+@import './estilos/07-perfil-parlamentar.css';

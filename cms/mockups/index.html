@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Câmara de Lajeado — Escolha o layout</title>
+<style>
+  body{margin:0;font-family:system-ui,sans-serif;background:#0e1726;color:#e7edf5;line-height:1.55}
+  .wrap{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
+  h1{font-size:2rem;margin:0 0 .3rem}
+  p.sub{color:#9fb1c8;margin:0 0 2.5rem}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .card{background:#16223a;border:1px solid #26344f;border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:.18s}
+  .card:hover{transform:translateY(-5px);border-color:#2a6fdb;box-shadow:0 20px 40px -24px #000}
+  .sw{height:120px}
+  .sw1{background:linear-gradient(135deg,#13402b,#c8a049)}
+  .sw2{background:linear-gradient(135deg,#b8482a,#faf6ee)}
+  .sw3{background:linear-gradient(135deg,#081f3d,#2a6fdb 60%,#ffce3a)}
+  .b{padding:1.3rem}
+  .b .n{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#5b9bff;font-weight:700}
+  .b h2{font-size:1.25rem;margin:.3rem 0 .5rem}
+  .b p{margin:0;color:#9fb1c8;font-size:.92rem}
+  .b .go{display:inline-block;margin-top:1rem;font-weight:700;color:#ffce3a}
+  @media(max-width:780px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Portal da Câmara de Lajeado — 3 direções de layout</h1>
+  <p class="sub">Mesmo conteúdo, três identidades visuais. Abra cada uma e escolha. Depois eu implemento a escolhida no portal (Next.js).</p>
+  <div class="grid">
+    <a class="card" href="layout-1-classico.html">
+      <div class="sw sw1"></div>
+      <div class="b"><span class="n">Layout 1</span><h2>Clássico Cívico</h2><p>Sóbrio e tradicional. Serifa elegante (Lora), verde institucional e dourado. Transmite dignidade e confiança.</p><span class="go">Abrir layout 1 →</span></div>
+    </a>
+    <a class="card" href="layout-2-editorial.html">
+      <div class="sw sw2"></div>
+      <div class="b"><span class="n">Layout 2</span><h2>Editorial Moderno</h2><p>Revista cívica. Tipografia expressiva (Fraunces), creme e terracota, muito respiro e hierarquia forte.</p><span class="go">Abrir layout 2 →</span></div>
+    </a>
+    <a class="card" href="layout-3-contemporaneo.html">
+      <div class="sw sw3"></div>
+      <div class="b"><span class="n">Layout 3</span><h2>Contemporâneo Alto Contraste</h2><p>Energético e direto. Navy + azul vivo + amarelo sinal, fonte robusta (Archivo). Moderno e muito acessível.</p><span class="go">Abrir layout 3 →</span></div>
+    </a>
+  </div>
+</div>
+</body>
+</html>

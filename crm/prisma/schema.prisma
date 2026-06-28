@@ -1,0 +1,274 @@
+// Fundação do CRM — multi-tenant: Câmara (nível 1) → Gabinete (nível 2).
+// Dados do CRM são isolados POR GABINETE. O isolamento é aplicado automaticamente
+// pela Prisma Extension (src/lib/prisma.ts), não manualmente em cada query.
+// pgvector e schema geo entram depois (Fase 0 cont. / Fase 2/3) — aqui só a espinha
+// necessária para PROVAR o isolamento (risco #3 das premissas).
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+// ---------- TENANCY (não isolado — é a própria estrutura de tenant) ----------
+
+model Camara {
+  id          String               @id @default(cuid())
+  nome        String
+  municipio   String
+  uf          String
+  codigoIbge  String? // código IBGE 7 dígitos do município (p/ Querido Diário / IBGE)
+  saplUrl     String?
+  gabinetes   Gabinete[]
+  usuarios    Usuario[]
+  cidadaos    Cidadao[]
+  demandas    Demanda[]
+  unidades    UnidadeTerritorial[]
+  resultados  ResultadoEleitoral[]
+  createdAt   DateTime             @default(now())
+}
+
+model Gabinete {
+  id        String    @id @default(cuid())
+  camaraId  String
+  camara    Camara    @relation(fields: [camaraId], references: [id])
+  nome      String // ex.: "Gabinete Ver. Fulano"
+  // nome do vereador EXATAMENTE como aparece no TSE (NM_VOTAVEL) — identifica "eu" no
+  // Mapa de Disputa (meu voto × rival por bairro). Null = gabinete sem vínculo eleitoral.
+  candidatoTse String?
+  usuarios  Usuario[]
+  cidadaos  Cidadao[]
+  demandas  Demanda[]
+  createdAt DateTime  @default(now())
+
+  @@index([camaraId])
+}
+
+model Usuario {
+  id         String   @id @default(cuid())
+  camaraId   String
+  camara     Camara   @relation(fields: [camaraId], references: [id])
+  gabineteId String
+  gabinete   Gabinete @relation(fields: [gabineteId], references: [id])
+  email      String   @unique
+  nome       String
+  senhaHash  String
+  ativo      Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([gabineteId])
+}
+
+// ---------- DADOS DO CRM (isolados por gabinete) ----------
+
+enum TipoContato {
+  CIDADAO
+  LIDERANCA
+}
+
+model Cidadao {
+  id         String    @id @default(cuid())
+  camaraId   String
+  camara     Camara    @relation(fields: [camaraId], references: [id])
+  gabineteId String
+  gabinete   Gabinete  @relation(fields: [gabineteId], references: [id])
+  nome          String
+  telefone      String?
+  email         String?
+  bairro        String?
+  nascimento    DateTime? // base do alerta de aniversário
+  tags          String[] // segmentação (ex.: "saúde", "líder comunitário")
+  tipoContato   TipoContato @default(CIDADAO)
+  // campos de liderança (preenchidos quando tipoContato = LIDERANCA)
+  tipoLideranca    String? // associação, religiosa, comércio…
+  influencia       Int? // 1..5
+  regiaoInfluencia String?
+  ultimoContato DateTime? // base do termômetro de relacionamento
+  demandas      Demanda[]
+  comunicacoes  ComunicacaoEnviada[]
+  alertas       Alerta[]
+  createdAt     DateTime  @default(now())
+
+  @@index([gabineteId])
+  @@index([gabineteId, tipoContato])
+}
+
+// Documentos do gabinete (ofícios, requerimentos, declarações). Mala direta cria um por contato.
+model DocumentoGabinete {
+  id           String   @id @default(cuid())
+  camaraId     String
+  gabineteId   String
+  tipo         String // ofício / requerimento / declaração / carta
+  numero       String?
+  destinatario String?
+  cidadaoId    String? // preenchido quando veio de mala direta
+  conteudo     String
+  status       String   @default("rascunho") // rascunho / finalizado
+  createdAt    DateTime @default(now())
+
+  @@index([gabineteId])
+}
+
+// Alertas gerados por jobs (ex.: cutuca de relacionamento). lidoEm null = pendente.
+model Alerta {
+  id         String    @id @default(cuid())
+  camaraId   String
+  gabineteId String
+  cidadaoId  String?
+  cidadao    Cidadao?  @relation(fields: [cidadaoId], references: [id], onDelete: Cascade)
+  tipo       String // relacionamento_frio / aniversario / …
+  mensagem   String
+  lidoEm     DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([gabineteId, lidoEm])
+}
+
+// Prova de trabalho / disparos. Por ora registramos (canal=REGISTRO); envio real
+// (email/whatsapp/sms) entra com a fila BullMQ depois.
+enum CanalComunicacao {
+  REGISTRO
+  EMAIL
+  SMS
+  WHATSAPP
+}
+
+model ComunicacaoEnviada {
+  id         String           @id @default(cuid())
+  camaraId   String
+  gabineteId String
+  cidadaoId  String
+  cidadao    Cidadao          @relation(fields: [cidadaoId], references: [id], onDelete: Cascade)
+  demandaId  String?
+  canal      CanalComunicacao @default(REGISTRO)
+  tipo       String // demanda_resolvida / aniversario / boletim
+  conteudo   String
+  enviadaEm  DateTime? // preenchido pelo worker quando "entregue" (null = só registrada/na fila)
+  createdAt  DateTime         @default(now())
+
+  @@index([gabineteId])
+  @@index([cidadaoId])
+}
+
+enum StatusDemanda {
+  ABERTA
+  EM_ANDAMENTO
+  ENCAMINHADA
+  RESOLVIDA
+}
+
+model Demanda {
+  id           String        @id @default(cuid())
+  camaraId     String
+  camara       Camara        @relation(fields: [camaraId], references: [id])
+  gabineteId   String
+  gabinete     Gabinete      @relation(fields: [gabineteId], references: [id])
+  cidadaoId    String?
+  cidadao      Cidadao?      @relation(fields: [cidadaoId], references: [id])
+  titulo       String
+  descricao    String?
+  tema         String? // saúde, asfalto, iluminação…
+  status       StatusDemanda @default(ABERTA)
+  bairro       String?
+  lat          Float?
+  lng          Float?
+  materiaIdSapl Int?         // virou proposição no SAPL
+  movimentacoes MovimentacaoDemanda[]
+  createdAt    DateTime      @default(now())
+
+  @@index([gabineteId])
+  @@index([gabineteId, status])
+}
+
+// Histórico da demanda: cada mudança de status (ou anotação) gera um registro imutável.
+// É a base da "prova de trabalho" — quando vira RESOLVIDA, dispara comunicação ao cidadão.
+model MovimentacaoDemanda {
+  id         String         @id @default(cuid())
+  camaraId   String
+  gabineteId String
+  demandaId  String
+  demanda    Demanda        @relation(fields: [demandaId], references: [id], onDelete: Cascade)
+  de         StatusDemanda? // status anterior (null na 1ª)
+  para       StatusDemanda
+  nota       String?
+  createdAt  DateTime       @default(now())
+
+  @@index([gabineteId])
+  @@index([demandaId])
+}
+
+// ---------- GEO / ELEITORAL (escopo por CÂMARA, não por gabinete) ----------
+// Decisão das premissas #2: a unidade territorial é o BAIRRO (malha IBGE), não a seção —
+// o TSE não publica polígono de seção. Voto da seção é geocodificado pelo local de
+// votação e agregado ao bairro. Sempre AGREGADO (LGPD) — nunca individualiza eleitor.
+
+model UnidadeTerritorial {
+  id          String               @id @default(cuid())
+  camaraId    String
+  camara      Camara               @relation(fields: [camaraId], references: [id])
+  nome        String // nome do bairro
+  codigoIbge  String?
+  geojson     Json? // polígono do bairro (malha IBGE)
+  resultados  ResultadoEleitoral[]
+  createdAt   DateTime             @default(now())
+
+  @@index([camaraId])
+}
+
+model ResultadoEleitoral {
+  id            String              @id @default(cuid())
+  camaraId      String
+  camara        Camara              @relation(fields: [camaraId], references: [id])
+  unidadeId     String?
+  unidade       UnidadeTerritorial? @relation(fields: [unidadeId], references: [id])
+  ano           Int
+  cargo         String // "Vereador"
+  candidatoNome String
+  partido       String?
+  votos         Int
+  // proveniência: dado bruto do TSE é por seção; aqui guardamos a seção de origem
+  zona          Int?
+  secao         Int?
+  localVotacao  String?
+
+  @@index([camaraId, ano])
+  @@index([unidadeId])
+}
+
+// ---------- IA ----------
+// Artefatos gerados pela IA (agenda da semana, varredura do diário, dossiês…), persistidos
+// por gabinete p/ sobreviver à navegação. Escopo gabinete (isolado pela extensão).
+model ConteudoIA {
+  id         String   @id @default(cuid())
+  camaraId   String
+  gabineteId String
+  tipo       String // agenda_semana | vigia_diario | dossie | ...
+  titulo     String?
+  conteudo   String // texto (markdown) principal
+  dados      Json? // payload estruturado (sinais, achados…)
+  createdAt  DateTime @default(now())
+
+  @@index([gabineteId, tipo])
+}
+
+model Embedding {
+  id          String                @id @default(cuid())
+  camaraId    String
+  // gabineteId NULL = documento compartilhado da câmara (TSE/norma/SAPL); preenchido =
+  // dado PRIVADO do gabinete (demanda/comunicação). A busca semântica (raw SQL) filtra
+  // manualmente: camaraId = X AND (gabineteId = Y OR gabineteId IS NULL).
+  gabineteId  String?
+  origem      String // demanda / comunicacao / materia_sapl / norma
+  referenciaId String
+  texto       String
+  vetor       Unsupported("vector(1024)")? // bge-m3 (Ollama) = 1024 dims
+  createdAt   DateTime              @default(now())
+
+  @@index([camaraId])
+  @@index([gabineteId])
+}

@@ -1,0 +1,420 @@
+/* Controles de acessibilidade (barra superior) */
+.a11y {
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.a11y button {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.a11y button:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.a11y button[aria-pressed='true'] {
+  background: var(--ouro);
+  color: var(--navy);
+  border-color: var(--ouro);
+}
+
+/* Escala de fonte (raiz em rem → escala tudo) */
+html[data-fonte='g'] {
+  font-size: 112.5%;
+}
+
+html[data-fonte='gg'] {
+  font-size: 125%;
+}
+
+/* Alto contraste (eMAG/LBI): redefine as variáveis + força superfícies claras */
+html[data-contraste='1'] {
+  --navy: #ffffff;
+  --azul: #ffff00;
+  --cinza: #f0f0f0;
+  --gelo: #000000;
+  --linha: #ffffff;
+  --amarelo: #ffff00;
+  --branco: #000000;
+  background: #000;
+}
+
+html[data-contraste='1'] body {
+  background: #000;
+  color: #fff;
+}
+
+html[data-contraste='1'] .main,
+html[data-contraste='1'] .busca-card,
+html[data-contraste='1'] .card,
+html[data-contraste='1'] .bloco,
+html[data-contraste='1'] .central-porta,
+html[data-contraste='1'] .pessoa,
+html[data-contraste='1'] .faq details,
+html[data-contraste='1'] input,
+html[data-contraste='1'] select,
+html[data-contraste='1'] textarea {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+html[data-contraste='1'] a {
+  color: #ffff00 !important;
+}
+
+html[data-contraste='1'] .btn-am {
+  background: #ffff00 !important;
+  color: #000 !important;
+}
+
+/* Central de Administração (porta única SAPL + Painel) */
+.central {
+  min-height: 100vh;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.central-marca {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.central-logo {
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.central-inicial {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-archivo);
+  font-weight: 800;
+  font-size: 1.6rem;
+  border-radius: 12px;
+}
+
+.central-eyebrow {
+  margin: 0;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--azul);
+  font-weight: 700;
+}
+
+.central-marca h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0.1rem 0 0;
+}
+
+.central-intro {
+  color: var(--cinza);
+  margin: 0;
+}
+
+.central-portas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.central-porta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.6rem;
+  border: 1px solid var(--linha);
+  border-radius: 16px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.central-porta:hover {
+  border-color: var(--azul);
+  box-shadow: 0 18px 40px -22px rgba(8, 31, 61, 0.5);
+  transform: translateY(-2px);
+}
+
+.central-ic {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--gelo);
+  color: var(--azul);
+}
+
+.central-porta h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0.3rem 0 0;
+}
+
+.central-porta p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+.central-porta strong {
+  color: var(--azul);
+}
+
+.central-rodape {
+  color: var(--cinza);
+  font-size: 0.85rem;
+  margin: 0;
+  border-top: 1px solid var(--linha);
+  padding-top: 1.2rem;
+}
+
+@media (max-width: 560px) {
+  .central-portas {
+    grid-template-columns: 1fr;
+  }
+
+  .central {
+    padding: 2.5rem 1.2rem;
+  }
+}
+
+/* Perguntas Frequentes */
+.faq {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.faq details {
+  border: 1px solid var(--linha);
+  border-radius: 12px;
+  padding: 0.2rem 1.1rem;
+  background: #fff;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--navy);
+  padding: 0.85rem 0;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: '+';
+  float: right;
+  color: var(--azul);
+  font-weight: 800;
+}
+
+.faq details[open] summary::after {
+  content: '−';
+}
+
+.faq details p {
+  margin: 0 0 0.9rem;
+  color: var(--cinza);
+}
+
+/* Aviso de base legal (e-SIC / Ouvidoria) */
+.aviso-legal {
+  margin: 1rem 0 0;
+  padding: 0.9rem 1.1rem 0.9rem 1.3rem;
+  background: var(--gelo);
+  border-left: 4px solid var(--amarelo);
+  border-radius: 10px;
+  list-style: disc;
+}
+
+.aviso-legal li {
+  margin-left: 1rem;
+  font-size: 0.88rem;
+  color: var(--cinza);
+}
+
+.aviso-legal li+li {
+  margin-top: 0.3rem;
+}
+
+/* Banner de consentimento LGPD */
+.cookie-banner {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 14px;
+  padding: 1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: 0 20px 45px -20px rgba(8, 31, 61, 0.6);
+}
+
+.cookie-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.cookie-banner a {
+  color: var(--amarelo);
+  text-decoration: underline;
+}
+
+.cookie-banner .btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}
+
+/* Formulários de manifestação (e-SIC / Ouvidoria) */
+.form-manifestacao {
+  max-width: 640px;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-manifestacao label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--navy);
+}
+
+.form-manifestacao input[type="text"],
+.form-manifestacao input[type="email"],
+.form-manifestacao input[type="tel"],
+.form-manifestacao input[type="number"],
+.form-manifestacao select,
+.form-manifestacao textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid var(--linha);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  font-weight: 400;
+}
+
+/* (foco dos campos de manifestação → primitivo único em 01-base.css) */
+
+.form-manifestacao textarea {
+  resize: vertical;
+}
+
+.form-linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-check {
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 0.6rem !important;
+  font-weight: 400 !important;
+  color: var(--cinza) !important;
+  font-size: 0.85rem !important;
+}
+
+.form-check input {
+  margin-top: 0.2rem;
+}
+
+.form-manifestacao .btn {
+  align-self: flex-start;
+}
+
+.form-erro {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.form-sucesso {
+  max-width: 640px;
+  margin-top: 1.5rem;
+  background: var(--gelo);
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--azul);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+}
+
+.form-sucesso .protocolo {
+  font-family: var(--font-archivo);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 560px) {
+  .form-linha {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* VLibras: posiciona só o BOTÃO de acesso (não o container [vw], senão prende o
+   painel do avatar e quebra o layout). O painel o plugin posiciona sozinho. */
+[vw-access-button] {
+  position: fixed !important;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+}
+

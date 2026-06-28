@@ -1,0 +1,119 @@
+/* Rodapé */
+footer.site {
+  background: var(--navy);
+  color: #9fb1c8;
+  font-size: 0.9rem;
+  padding: 2.8rem 0 1.4rem;
+}
+
+footer.site .cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2rem 1.5rem;
+}
+
+footer.site h4 {
+  font-family: var(--font-archivo);
+  color: #fff;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+}
+
+footer.site a {
+  display: block;
+  text-decoration: none;
+  color: #9fb1c8;
+  padding: 0.18rem 0;
+}
+
+footer.site a:hover {
+  color: var(--amarelo);
+}
+
+footer.site .legal {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  font-size: 0.82rem;
+}
+
+/* Informações de Contato (Rodapé) */
+footer.site .contato {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+footer.site .contato-info {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2.5rem;
+  row-gap: 1.2rem;
+}
+
+footer.site .contato-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #c9d6e8;
+  font-size: 0.95rem;
+}
+
+footer.site .contato-linha a {
+  padding: 0;
+  display: inline;
+}
+
+footer.site .contato-linha svg {
+  width: 18px;
+  height: 18px;
+  color: var(--amarelo);
+  flex-shrink: 0;
+}
+
+/* Bloco de transparência — destacado e descolado do rodapé (respiro antes do footer) */
+.transp {
+  background: var(--navy);
+  color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.transp .in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.6rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.transp::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 240px;
+  height: 240px;
+  background: var(--azul);
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.45;
+}
+
+.transp h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.transp p {
+  margin: 0.5rem 0 0;
+  color: #bcccdf;
+  max-width: 52ch;
+}

@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mockups — Página do vereador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d2c54;
+    --navy-2:#143568;
+    --ouro:#d4a017;
+    --ouro-2:#b88912;
+    --texto:#1a2235;
+    --cinza:#5a6478;
+    --linha:#e2e6ee;
+    --gelo:#f4f6fa;
+    --fundo:#eef1f6;
+    --branco:#ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body{
+    margin:0; background:var(--fundo); color:var(--texto);
+    font: 16px/1.55 'Inter', system-ui, sans-serif;
+  }
+  img { max-width:100%; display:block; outline: 1px solid rgba(0,0,0,0.08); outline-offset:-1px; }
+
+  .topo{
+    background:var(--navy); color:#fff; padding:1.4rem 0;
+  }
+  .topo .wrap{ max-width:1100px; margin:0 auto; padding:0 1.5rem; display:flex; align-items:baseline; gap:1rem; }
+  .topo h1{ margin:0; font-size:1.15rem; font-weight:600; }
+  .topo span{ color:#bcccdf; font-size:0.9rem; }
+
+  .secao{
+    max-width:1100px; margin:3rem auto; padding:0 1.5rem;
+  }
+  .secao h2{
+    font: 600 0.78rem/1 'Inter', sans-serif;
+    text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--cinza); margin:0 0 1rem;
+    display:flex; align-items:center; gap:0.6rem;
+  }
+  .secao h2::before{
+    content:""; width:24px; height:2px; background:var(--ouro);
+  }
+  .nota{ color:var(--cinza); font-size:0.92rem; margin:0 0 1.4rem; text-wrap: pretty; max-width:70ch; }
+
+  /* ============================================================ */
+  /* MOCKUP 1 — Dossiê institucional                              */
+  /* ============================================================ */
+  .m1{
+    background:var(--branco); border-radius:14px; overflow:hidden;
+    box-shadow: 0 1px 0 rgba(15,30,60,0.04), 0 8px 24px -12px rgba(15,30,60,0.12);
+    border:1px solid var(--linha);
+  }
+  .m1 .faixa{
+    background:var(--navy); color:#fff; padding:0.7rem 2rem;
+    font: 600 0.72rem/1 'Inter', sans-serif;
+    text-transform:uppercase; letter-spacing:0.18em;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .m1 .faixa b{ color:var(--ouro); font-weight:700; }
+  .m1 .corpo{
+    display:grid; grid-template-columns: 280px 1fr; gap:2.4rem;
+    padding:2.4rem;
+  }
+  .m1 .foto{
+    aspect-ratio: 3/4; border-radius:10px; overflow:hidden;
+    background:linear-gradient(135deg,#dde3ed,#c5cfe0);
+    position:relative;
+  }
+  .m1 .foto::after{
+    content:""; position:absolute; inset:0;
+    box-shadow: inset 0 0 0 1px rgba(15,30,60,0.08);
+    border-radius:inherit; pointer-events:none;
+  }
+  .m1 .foto img{ width:100%; height:100%; object-fit:cover; outline:none; }
+  .m1 .foto .ph{ display:grid; place-items:center; width:100%; height:100%; color:#fff; font:600 4rem/1 'Source Serif 4', serif; background:linear-gradient(135deg,var(--navy),var(--navy-2));}
+  .m1 .nome{
+    font:700 2.4rem/1.1 'Source Serif 4', serif;
+    margin:0; color:var(--navy);
+    text-wrap: balance; display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap;
+  }
+  .m1 .chip-partido{
+    display:inline-grid; place-items:center;
+    min-width:48px; height:30px; padding:0 0.7rem;
+    border-radius:6px; background:var(--navy); color:#fff;
+    font:700 0.78rem/1 'Inter', sans-serif; letter-spacing:0.04em;
+  }
+  .m1 .nome-completo{
+    color:var(--cinza); font:400 1rem/1.4 'Inter', sans-serif;
+    margin:0.5rem 0 0;
+  }
+  .m1 .stats{
+    margin:1.6rem 0; padding:0.9rem 1.1rem; background:var(--gelo); border-radius:10px;
+    display:flex; gap:1.6rem; font-variant-numeric: tabular-nums;
+    border:1px solid var(--linha);
+  }
+  .m1 .stats div b{ display:block; font:700 1.15rem/1 'Inter', sans-serif; color:var(--navy); }
+  .m1 .stats div span{ color:var(--cinza); font-size:0.82rem; }
+  .m1 .contatos{
+    list-style:none; padding:0; margin:1.4rem 0 0;
+    display:flex; gap:1.8rem; flex-wrap:wrap; color:var(--texto); font-size:0.95rem;
+  }
+  .m1 .contatos li{ display:flex; align-items:center; gap:0.5rem; }
+  .m1 .contatos svg{ color:var(--ouro-2); }
+  .m1 .bloco{ margin-top:2rem; }
+  .m1 .bloco h3{
+    font: 600 0.75rem/1 'Inter', sans-serif; text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--cinza); margin:0 0 0.7rem;
+    padding-bottom:0.5rem; border-bottom:1px solid var(--linha);
+  }
+  .m1 .bloco p{ max-width:60ch; text-wrap:pretty; margin:0; line-height:1.7; }
+
+  /* ============================================================ */
+  /* MOCKUP 2 — Card de identidade (app moderno)                  */
+  /* ============================================================ */
+  .m2{
+    background:var(--branco); border-radius:18px;
+    box-shadow: 0 1px 0 rgba(15,30,60,0.04), 0 12px 32px -16px rgba(15,30,60,0.18);
+    border:1px solid var(--linha); overflow:hidden;
+  }
+  .m2 .voltar{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    padding:0.6rem 1rem; margin:1.4rem 1.4rem 0; color:var(--navy);
+    text-decoration:none; font-size:0.88rem; border-radius:8px;
+    transition-property: background-color; transition-duration: 150ms;
+  }
+  .m2 .voltar:hover{ background:var(--gelo); }
+  .m2 .hero-card{
+    padding:2rem 2rem 0; text-align:center;
+  }
+  .m2 .avatar{
+    width:160px; height:160px; border-radius:50%; margin:0.5rem auto 1.2rem;
+    overflow:hidden; position:relative;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--linha), 0 12px 28px -10px rgba(15,30,60,0.25);
+    background:linear-gradient(135deg,var(--navy),var(--navy-2));
+    display:grid; place-items:center; color:#fff;
+    font:600 3.2rem/1 'Inter', sans-serif;
+  }
+  .m2 .avatar img{ width:100%; height:100%; object-fit:cover; outline:none; }
+  .m2 .nome{
+    font:700 1.8rem/1.15 'Inter', sans-serif; color:var(--texto);
+    text-wrap:balance; margin:0;
+  }
+  .m2 .pills{
+    display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;
+    margin:0.8rem 0 1.5rem;
+  }
+  .m2 .pill{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    padding:0.35rem 0.85rem; border-radius:9999px;
+    font:500 0.82rem/1 'Inter', sans-serif;
+    background:var(--gelo); color:var(--navy); border:1px solid var(--linha);
+  }
+  .m2 .pill.partido{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .m2 .pill.cargo{ background:#fff7e0; color:#876200; border-color:#f0d680; }
+
+  .m2 .acoes{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:0.7rem;
+    padding:0 2rem 1.5rem;
+  }
+  .m2 .acao{
+    min-height:44px; padding:0.7rem 1rem; border-radius:10px;
+    border:1px solid var(--linha); background:#fff; color:var(--navy);
+    text-decoration:none; display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    font:500 0.92rem/1 'Inter', sans-serif;
+    transition-property: transform, background-color, box-shadow;
+    transition-duration: 150ms; transition-timing-function: ease-out;
+  }
+  .m2 .acao:hover{ background:var(--gelo); box-shadow: 0 4px 12px -4px rgba(15,30,60,0.12); }
+  .m2 .acao:active{ transform: scale(0.97); }
+
+  .m2 .tabs{
+    border-top:1px solid var(--linha);
+    display:flex; padding:0 2rem; gap:0.2rem; position:relative;
+  }
+  .m2 .tab{
+    background:none; border:none; padding:1rem 0.9rem; margin-top:0.2rem;
+    font:500 0.9rem/1 'Inter', sans-serif; color:var(--cinza); cursor:pointer;
+    border-bottom:2px solid transparent; transition:color 150ms ease;
+  }
+  .m2 .tab.ativa{ color:var(--navy); border-bottom-color:var(--ouro); }
+  .m2 .tab:hover{ color:var(--navy); }
+  .m2 .conteudo-tab{
+    padding:1.8rem 2rem 2.2rem;
+  }
+  .m2 .conteudo-tab p{ margin:0; max-width:62ch; line-height:1.7; text-wrap:pretty; color:var(--texto); }
+  .m2 .comissoes{
+    list-style:none; padding:0; margin:1.2rem 0 0; display:grid; gap:0.6rem;
+  }
+  .m2 .comissoes li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.8rem 1rem; background:var(--gelo); border-radius:8px;
+    border:1px solid var(--linha);
+  }
+  .m2 .comissoes .cargo-pill{
+    font:600 0.74rem/1 'Inter', sans-serif; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--ouro-2);
+  }
+
+  /* ============================================================ */
+  /* MOCKUP 3 — Editorial fotográfico                              */
+  /* ============================================================ */
+  .m3{
+    background:var(--branco); border-radius:14px; overflow:hidden;
+    box-shadow: 0 1px 0 rgba(15,30,60,0.04), 0 8px 24px -12px rgba(15,30,60,0.12);
+    border:1px solid var(--linha);
+  }
+  .m3 .banner{
+    aspect-ratio: 21/8; background:linear-gradient(135deg,#1d4178,#0a1e3d);
+    position:relative; overflow:hidden;
+  }
+  .m3 .banner::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06), transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(212,160,23,0.08), transparent 55%);
+  }
+  .m3 .banner::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 35%, rgba(8,20,42,0.78) 100%);
+  }
+  .m3 .banner img{ width:100%; height:100%; object-fit:cover; object-position: top center; outline:none; }
+  .m3 .titulo-overlay{
+    position:absolute; left:0; right:0; bottom:0; padding:2rem 2.4rem;
+    color:#fff; z-index:1;
+  }
+  .m3 .titulo-overlay h2{
+    font:700 3rem/1.05 'Source Serif 4', serif; margin:0;
+    text-wrap:balance; color:#fff; letter-spacing:-0.01em;
+  }
+  .m3 .titulo-overlay h2::before{ display:none; }
+  .m3 .titulo-overlay .meta{
+    margin-top:0.6rem; font:500 0.95rem/1 'Inter', sans-serif;
+    color:#dde3ed; display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;
+  }
+  .m3 .titulo-overlay .meta .sep{ width:4px; height:4px; border-radius:50%; background:var(--ouro); }
+
+  .m3 .citacao{
+    max-width:55ch; margin:2.4rem auto 0; padding:0 2rem;
+    text-align:center; font:400 italic 1.15rem/1.55 'Source Serif 4', serif;
+    color:var(--navy); text-wrap:pretty;
+  }
+  .m3 .citacao::before, .m3 .citacao::after{
+    content:""; display:block; width:32px; height:2px; background:var(--ouro);
+    margin:0 auto 1rem;
+  }
+  .m3 .citacao::after{ margin:1rem auto 0; }
+
+  .m3 .contato-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem;
+    padding:2.4rem 2.4rem 0;
+  }
+  .m3 .contato-card{
+    padding:1.2rem; border:1px solid var(--linha); border-radius:12px;
+    background:#fff; text-decoration:none; color:inherit;
+    transition-property: transform, box-shadow;
+    transition-duration: 180ms; transition-timing-function: ease-out;
+  }
+  .m3 .contato-card:hover{
+    transform:translateY(-2px);
+    box-shadow: 0 8px 20px -8px rgba(15,30,60,0.18);
+  }
+  .m3 .contato-card .ic{
+    width:36px; height:36px; border-radius:8px; background:var(--gelo);
+    color:var(--navy); display:grid; place-items:center; margin-bottom:0.7rem;
+  }
+  .m3 .contato-card .label{
+    display:block; font:600 0.72rem/1 'Inter', sans-serif;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--cinza);
+    margin-bottom:0.3rem;
+  }
+  .m3 .contato-card .valor{
+    font:500 0.98rem/1.3 'Inter', sans-serif; color:var(--texto);
+    font-variant-numeric: tabular-nums;
+  }
+  .m3 .sobre{
+    padding:2.4rem; max-width:680px; margin:0 auto;
+  }
+  .m3 .sobre h3{
+    font:600 0.75rem/1 'Inter', sans-serif; text-transform:uppercase; letter-spacing:0.14em;
+    color:var(--cinza); margin:0 0 1rem;
+    display:flex; align-items:center; gap:0.6rem;
+  }
+  .m3 .sobre h3::before{ content:""; width:24px; height:2px; background:var(--ouro); }
+  .m3 .sobre p{ line-height:1.75; text-wrap:pretty; margin:0; }
+
+  /* Footer dos mockups */
+  .legenda{
+    display:grid; grid-template-columns: 1fr 1fr 1fr; gap:1rem;
+    margin-top:1.2rem;
+  }
+  .legenda div{
+    padding:0.9rem 1rem; background:#fff; border:1px solid var(--linha);
+    border-radius:10px; font-size:0.86rem; color:var(--cinza);
+  }
+  .legenda b{ display:block; color:var(--navy); margin-bottom:0.25rem; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; }
+
+  @media (max-width: 800px){
+    .m1 .corpo{ grid-template-columns:1fr; }
+    .m2 .acoes, .m3 .contato-grid{ grid-template-columns: 1fr; }
+    .m3 .titulo-overlay h2{ font-size:2rem; }
+    .legenda{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <h1>Mockups — Página do vereador</h1>
+    <span>3 direções de design</span>
+  </div>
+</header>
+
+<!-- =================== MOCKUP 1 =================== -->
+<section class="secao">
+  <h2>Mockup 1 — Dossiê institucional</h2>
+  <p class="nota">Pegada de jornal oficial. Foto retrato, nome em serif, faixa cívica.
+    Para quando o portal precisa transmitir <b>autoridade</b>. Funciona mesmo com foto institucional sóbria.</p>
+
+  <article class="m1">
+    <div class="faixa">
+      <span>Vereador · Legislatura 2025–2028</span>
+      <span><b>Câmara Municipal de Lajeado</b></span>
+    </div>
+    <div class="corpo">
+      <div class="foto"><div class="ph">F</div></div>
+      <div>
+        <h2 class="nome" style="text-transform:none;letter-spacing:0;color:var(--navy);">
+          Francisco Silva <span class="chip-partido">PT</span>
+        </h2>
+        <p class="nome-completo">Francisco da Silva Santos</p>
+
+        <div class="stats">
+          <div><b>12</b><span>projetos de autoria</span></div>
+          <div><b>248</b><span>votações</span></div>
+          <div><b>96%</b><span>presença em sessões</span></div>
+        </div>
+
+        <ul class="contatos">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> francisco.silva@camara.gov.br</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (51) 3714-1234</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Gabinete 04</li>
+        </ul>
+
+        <div class="bloco">
+          <h3>Sobre</h3>
+          <p>Vereador no segundo mandato consecutivo, formado em Direito pela Univates,
+            atua nas frentes de educação, mobilidade urbana e direitos humanos.
+            Presidiu a Comissão de Educação no biênio 2023–2024 e é autor da lei
+            municipal que instituiu o programa de transporte escolar gratuito para alunos
+            do ensino médio da rede pública.</p>
+        </div>
+
+        <div class="bloco">
+          <h3>Comissões</h3>
+          <p style="color:var(--cinza);font-size:0.9rem;">Educação, Cultura e Esporte · <b style="color:var(--navy);">Presidente</b><br/>
+            Constituição, Justiça e Redação · Membro</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <div class="legenda">
+    <div><b>Tipografia</b>Source Serif no nome, Inter no resto. Hierarquia clássica.</div>
+    <div><b>Stats</b>tabular-nums — números não dançam ao trocar de vereador.</div>
+    <div><b>Foto</b>3:4 retrato, outline interno de 1px pra fixar a borda.</div>
+  </div>
+</section>
+
+<!-- =================== MOCKUP 2 =================== -->
+<section class="secao">
+  <h2>Mockup 2 — Card de identidade (app moderno)</h2>
+  <p class="nota">Foto circular, ações rápidas grandes (44px de hit area), tabs separando o conteúdo.
+    Cara de <b>gov.br novo</b>. Bom pra mobile e pra páginas que vão crescer (projetos, votações).</p>
+
+  <article class="m2">
+    <a class="voltar" href="#">← Vereadores</a>
+    <div class="hero-card">
+      <div class="avatar">F</div>
+      <h2 class="nome" style="text-transform:none;letter-spacing:0;color:var(--texto);">Francisco Silva</h2>
+      <h2 style="display:none"></h2>
+      <div class="pills">
+        <span class="pill partido">PT</span>
+        <span class="pill cargo">1º Secretário</span>
+        <span class="pill">2º mandato</span>
+      </div>
+    </div>
+
+    <div class="acoes">
+      <a class="acao" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> E-mail</a>
+      <a class="acao" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Telefone</a>
+      <a class="acao" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Gabinete 04</a>
+    </div>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab ativa" role="tab" aria-selected="true">Sobre</button>
+      <button class="tab" role="tab">Projetos <span style="color:var(--cinza);font-variant-numeric:tabular-nums;">·12</span></button>
+      <button class="tab" role="tab">Votações <span style="color:var(--cinza);font-variant-numeric:tabular-nums;">·248</span></button>
+      <button class="tab" role="tab">Comissões</button>
+    </nav>
+
+    <div class="conteudo-tab">
+      <p>Vereador no segundo mandato consecutivo, formado em Direito pela Univates.
+        Atua nas frentes de educação, mobilidade urbana e direitos humanos.
+        É autor da lei municipal que instituiu o programa de transporte escolar gratuito
+        para alunos do ensino médio da rede pública.</p>
+
+      <ul class="comissoes">
+        <li>
+          <span>Educação, Cultura e Esporte</span>
+          <span class="cargo-pill">Presidente</span>
+        </li>
+        <li>
+          <span>Constituição, Justiça e Redação</span>
+          <span class="cargo-pill">Membro</span>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="legenda">
+    <div><b>Hit area</b>Botões de contato 44px de altura, mesmo se ícone for 18px.</div>
+    <div><b>Pills concentric</b>radius 9999 (totalmente arredondado) — separado do card retangular.</div>
+    <div><b>Tabs</b>underline com border-bottom; futuro: animar com transform.</div>
+  </div>
+</section>
+
+<!-- =================== MOCKUP 3 =================== -->
+<section class="secao">
+  <h2>Mockup 3 — Editorial fotográfico</h2>
+  <p class="nota">Foto domina, nome é título de matéria, citação curta destaca a voz do parlamentar.
+    Cara de <b>revista institucional</b>. Só funciona se a foto for boa — exige material decente.</p>
+
+  <article class="m3">
+    <div class="banner">
+      <div class="titulo-overlay">
+        <h2>Francisco Silva</h2>
+        <div class="meta">
+          <span>Vereador</span><span class="sep"></span>
+          <span>PT</span><span class="sep"></span>
+          <span>1º Secretário · 2º mandato</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="citacao">"Educação é o único investimento público que rende para sempre.
+      Tudo que conseguirmos plantar nas escolas hoje, a cidade colhe nas próximas décadas."</p>
+
+    <div class="contato-grid">
+      <a class="contato-card" href="#">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <span class="label">E-mail</span>
+        <span class="valor">francisco.silva@camara.gov.br</span>
+      </a>
+      <a class="contato-card" href="#">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <span class="label">Telefone</span>
+        <span class="valor">(51) 3714-1234</span>
+      </a>
+      <a class="contato-card" href="#">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <span class="label">Gabinete</span>
+        <span class="valor">Sala 04 · 2º andar</span>
+      </a>
+    </div>
+
+    <div class="sobre">
+      <h3>Sobre</h3>
+      <p>Vereador no segundo mandato consecutivo, formado em Direito pela Univates,
+        atua nas frentes de educação, mobilidade urbana e direitos humanos.
+        Presidiu a Comissão de Educação no biênio 2023–2024 e é autor da lei
+        municipal que instituiu o programa de transporte escolar gratuito para alunos
+        do ensino médio da rede pública.</p>
+    </div>
+  </article>
+
+  <div class="legenda">
+    <div><b>Banner</b>21:8 com gradient. object-position: top center pra não cortar rosto.</div>
+    <div><b>Cards de contato</b>radius 12px (concentric com banner 14px), hover sobe 2px.</div>
+    <div><b>Risco</b>foto ruim destrói. Precisa de fallback elegante (esse mockup mostra ele — gradient navy).</div>
+  </div>
+</section>
+
+
+<!-- =================== VARIAÇÕES DE PILLS =================== -->
+<section class="secao">
+  <h2>Variações — Mandato &amp; Status abaixo do nome</h2>
+  <p class="nota">3 estilos para exibir "4º mandato · Titular" logo abaixo do nome. Qual fica melhor?</p>
+
+  <style>
+    .pills-demo { background:var(--branco); border:1px solid var(--linha); border-radius:14px; padding:1.8rem 2rem; margin-bottom:1rem; }
+    .pills-demo .label { font:600 0.72rem/1 'Inter',sans-serif; text-transform:uppercase; letter-spacing:0.12em; color:var(--cinza); margin:0 0 1rem; }
+    .pills-demo .nome-ex { font:800 2rem/1.1 'Inter',sans-serif; color:var(--navy); margin:0 0 0.5rem; display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap; }
+    .chip { display:inline-grid; place-items:center; min-width:48px; height:30px; padding:0 0.7rem; border-radius:6px; background:var(--navy); color:#fff; font:700 0.78rem/1 'Inter',sans-serif; }
+
+    /* Opção A — badges sólidos (atual) */
+    .pills-a { display:flex; gap:0.4rem; flex-wrap:wrap; }
+    .pill-a { display:inline-flex; align-items:center; padding:0.28rem 0.7rem; border-radius:6px; font:600 0.8rem/1 'Inter',sans-serif; }
+    .pill-a.mandato { background:var(--navy); color:#fff; }
+    .pill-a.titular { background:#e8f0e8; color:#2d6a2d; }
+    .pill-a.suplente { background:#fff3e0; color:#a05000; }
+
+    /* Opção B — outline leve, sem peso */
+    .pills-b { display:flex; gap:0.5rem; flex-wrap:wrap; }
+    .pill-b { display:inline-flex; align-items:center; padding:0.28rem 0.75rem; border-radius:9999px; font:500 0.82rem/1 'Inter',sans-serif; border:1.5px solid; }
+    .pill-b.mandato { border-color:var(--navy); color:var(--navy); }
+    .pill-b.titular { border-color:#4a9e4a; color:#2d6a2d; }
+    .pill-b.suplente { border-color:#e07000; color:#a05000; }
+
+    /* Opção C — texto simples separado por · */
+    .pills-c { font:500 0.88rem/1 'Inter',sans-serif; color:var(--cinza); margin-top:0.15rem; }
+    .pills-c .destaque { color:var(--navy); font-weight:700; }
+    .pills-c .sep { margin:0 0.35rem; }
+    .pills-c .ok { color:#2d6a2d; font-weight:600; }
+    .pills-c .sup { color:#a05000; font-weight:600; }
+  </style>
+
+  <div class="pills-demo">
+    <p class="label">Opção A — badges sólidos compactos</p>
+    <div class="nome-ex">Francisco Silva <span class="chip">PT</span></div>
+    <div class="pills-a">
+      <span class="pill-a mandato">4º mandato</span>
+      <span class="pill-a titular">Titular</span>
+    </div>
+  </div>
+
+  <div class="pills-demo">
+    <p class="label">Opção B — outline suave, pill arredondada</p>
+    <div class="nome-ex">Francisco Silva <span class="chip">PT</span></div>
+    <div class="pills-b">
+      <span class="pill-b mandato">4º mandato</span>
+      <span class="pill-b titular">Titular</span>
+    </div>
+  </div>
+
+  <div class="pills-demo">
+    <p class="label">Opção C — texto corrido, sem badge (mais leve)</p>
+    <div class="nome-ex">Francisco Silva <span class="chip">PT</span></div>
+    <p class="pills-c">
+      <span class="destaque">4º mandato</span>
+      <span class="sep">·</span>
+      <span class="ok">Titular</span>
+    </p>
+  </div>
+</section>
+
+</body>
+</html>

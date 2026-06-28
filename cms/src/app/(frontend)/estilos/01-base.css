@@ -1,0 +1,520 @@
+/* Design system do portal público — Layout 3 "Contemporâneo Alto Contraste".
+   Fontes (Archivo / Public Sans) injetadas via next/font no layout. */
+:root {
+  --navy: #081f3d;
+  --navy-2: #0d2c54;
+  --azul: #2a6fdb;
+  --azul-claro: #5b9bff;
+  --amarelo: #ffce3a;
+  --ouro: #a9842f;
+  --tinta: #0e1726;
+  --cinza: #5a6675;
+  --gelo: #f4f7fb;
+  --linha: #e2e8f1;
+  --branco: #fff;
+  /* Largura única da coluna de leitura (a "espinha" de conteúdo). Definir AQUI;
+     todo mundo usa var(--leitura) em vez de repetir 72ch. */
+  --leitura: 72ch;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Reserva a barra de rolagem SEMPRE → a largura útil não muda entre páginas
+   curtas (sem scroll) e longas (com scroll). Evita o "pulo"/mudança de tamanho. */
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  background: var(--branco);
+  color: var(--tinta);
+  font-family: var(--font-public-sans), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card .img img,
+.not-rot__img img,
+.not-rot__mini-img img,
+.dest-v4__thumb img,
+.video-yt__thumb img {
+  outline: 1px solid rgba(0, 0, 0, 0.08);
+  outline-offset: -1px;
+}
+
+svg {
+  vertical-align: middle;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  background: var(--amarelo);
+  color: var(--navy);
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  z-index: 100;
+}
+
+.skip:focus {
+  left: 0;
+}
+
+/* Foco visível (WCAG 2.4.7/1.4.11 — auditoria a11y, docs/09): anel AZUL, não amarelo.
+   Amarelo dá só 1.48:1 sobre branco (invisível no conteúdo); azul passa em todos os
+   fundos do site (branco 4.78:1, gelo 4.45:1, navy 3.45:1 — todos ≥3:1). */
+:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 2px;
+}
+
+/* Em superfícies navy o amarelo é mais forte (11:1) — usar onde o fundo é escuro. */
+.util :focus-visible,
+header.main :focus-visible,
+footer.site :focus-visible {
+  outline-color: var(--amarelo);
+}
+
+/* Anel de foco dos campos de busca/formulário — PRIMITIVO ÚNICO (antes estava
+   copiado em 03-home, 05-cidadao e 06-conteudo). Realça borda + outline azul. */
+.busca-form input:focus-visible,
+.busca-inline input:focus-visible,
+.form-manifestacao input:focus-visible,
+.form-manifestacao select:focus-visible,
+.form-manifestacao textarea:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 1px;
+  border-color: var(--azul);
+}
+
+/* Acessibilidade: respeita preferência de menos movimento (WCAG / skill) */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* Botões */
+.btn {
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.85rem 1.4rem;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.btn-am {
+  background: var(--amarelo);
+  color: var(--navy);
+}
+
+.btn-am:hover {
+  background: #ffd95e;
+}
+
+.btn-gh {
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn-gh:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Acessibilidade: visível só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Cabeçalho de seção */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+}
+
+.sec-head h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.sec-head .bar {
+  width: 34px;
+  height: 5px;
+  background: var(--amarelo);
+  border-radius: 3px;
+}
+
+.sec-head a {
+  margin-left: auto;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--azul);
+}
+
+.sec-head a:hover {
+  text-decoration: underline;
+}
+
+/* Card base */
+.card {
+  border: 1px solid var(--linha);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card .img {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--azul), var(--navy));
+  position: relative;
+}
+
+/* Quando não há foto: corpo ocupa o card inteiro sem bloco azul */
+.card--sem-foto .b { position: static; background: none; }
+.noticias-lado .card--sem-foto { flex-direction: column; }
+.noticias-lado .card--sem-foto .b { padding: 0.5rem 0; justify-content: flex-start; }
+
+.card .img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .b {
+  padding: 0.9rem 1rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.card .cat {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--azul);
+}
+
+.card .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 99px;
+  background: #ccc;
+  flex: none;
+}
+
+.card .date {
+  font-size: 0.68rem;
+  color: var(--cinza);
+  font-weight: 400;
+}
+
+.card h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--cinza);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card .m {
+  margin-top: auto;
+  padding-top: 0.7rem;
+  font-weight: 700;
+  color: var(--azul);
+  font-size: 0.9rem;
+}
+
+.card:hover .m {
+  text-decoration: underline;
+}
+
+/* Paginação */
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 2rem 0 0.5rem;
+}
+
+.pag-nums {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pag-num,
+.pag-seta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.3rem;
+  height: 2.3rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tinta);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.pag-num:hover,
+.pag-seta:hover {
+  border-color: var(--azul);
+  color: var(--azul);
+}
+
+.pag-num.on {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.pag-seta {
+  font-weight: 700;
+}
+
+.pag-off {
+  color: var(--cinza);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.pag-elip {
+  padding: 0 0.3rem;
+  color: var(--cinza);
+}
+
+/* Estado vazio */
+.vazio {
+  color: var(--cinza);
+  background: var(--gelo);
+  border: 1px dashed var(--linha);
+  border-radius: 14px;
+  padding: 2rem;
+}
+
+/* Badges de status */
+.badge-on {
+  background: #e6f4ea;
+  color: #176a36;
+  border: 1px solid #b6e0c4;
+}
+
+.badge-off {
+  background: var(--gelo);
+  color: var(--cinza);
+  border: 1px solid var(--linha);
+}
+
+.badge-suplente {
+  background: #fff8e1;
+  color: #7a5800;
+  border: 1px solid #f0d060;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
+.badge-on,
+.badge-off {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Voltar (link de retorno) */
+.voltar {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--azul);
+  text-decoration: none;
+}
+
+.voltar:hover {
+  text-decoration: underline;
+}
+
+/* Placeholder "em construção" */
+.em-breve {
+  display: inline-block;
+  margin-top: 1.2rem;
+  background: var(--gelo);
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--amarelo);
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  color: var(--tinta);
+}
+
+/* Conteúdo de página simples (notícias, institucional) */
+.pagina {
+  padding-block: 3rem;
+}
+
+.pagina h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+/* ESPINHA ÚNICA do artigo: a largura/margem da coluna de leitura é definida
+   AQUI, uma vez só. Título, data, foto e texto são filhos e herdam essa mesma
+   largura e margem — nada de repetir max-width/margin em cada um. */
+.artigo {
+  max-width: var(--leitura);
+}
+
+/* Data: abaixo do título, à direita da espinha. */
+.artigo > .date {
+  font-size: 0.9rem;
+  display: block;
+  text-align: left;
+  margin-top: 0.3rem;
+}
+
+.prosa { text-align: justify; }
+
+.foto-destaque {
+  width: 100%;
+  border-radius: 14px;
+  margin: 1.5rem 0;
+  max-height: 440px;
+  object-fit: cover;
+  display: block;
+}
+
+.artigo-titulo {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin: 0.4rem 0 0.3rem;
+  text-align: left;
+}
+
+.prosa {
+  max-width: var(--leitura);
+}
+
+/* Título de subseção com borda amarela */
+.sec-titulo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--amarelo);
+  display: inline-block;
+}
+
+/* Lista compacta de links (sidebar, relacionados) */
+.lista-mini {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.lista-mini a {
+  display: block;
+  text-decoration: none;
+}
+
+.lista-mini .mini-data {
+  font-size: 0.74rem;
+  color: var(--cinza);
+  font-weight: 600;
+}
+
+.lista-mini .mini-tit {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+.lista-mini a:hover .mini-tit {
+  color: var(--azul);
+}
+

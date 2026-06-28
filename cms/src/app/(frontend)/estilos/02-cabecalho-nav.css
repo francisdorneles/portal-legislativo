@@ -1,0 +1,411 @@
+/* Cabeçalho: navy para coalar com a barra util acima */
+header.main {
+  background: var(--navy);
+}
+
+/* Nav-bar: mesma cor do header, borda ouro em baixo */
+.nav-bar {
+  background: var(--navy);
+  border-bottom: 3px solid var(--ouro);
+}
+
+.nav-bar .wrap {
+  max-width: none;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Divisor vertical entre brand e menu */
+.nav-divisor {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 0.8rem 0 0.2rem;
+  flex: none;
+}
+
+/* Brand compacto: logo pequeno + nome curto, tudo branco */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1rem 0.65rem 0;
+  text-decoration: none;
+  flex: none;
+  color: #fff;
+}
+
+.brand .blk {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ouro);
+  border: 1.5px solid rgba(201, 164, 74, 0.5);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: var(--font-archivo);
+  font-weight: 900;
+  font-size: 1rem;
+  flex: none;
+}
+
+.brand b {
+  font-family: var(--font-jakarta), sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: block;
+  line-height: 1.15;
+  color: #fff;
+}
+
+/* "Câmara Municipal" — rótulo acima do nome */
+.brand > span > span {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Ícones de redes sociais + acessibilidade: lado direito do nav-bar */
+.nav-redes {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Separador antes dos botões de acessibilidade */
+.nav-redes .a11y {
+  margin-left: 0.5rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  gap: 0.25rem;
+}
+
+.rede-link {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 40px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.15s, background 0.15s;
+}
+
+.rede-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Shell do cabeçalho: fixo no topo */
+.sticky-shell {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 2px 8px rgba(8, 31, 61, 0.12);
+}
+
+/* Menu principal com mega-dropdowns */
+.principal {
+  position: relative;
+  height: 100%;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.principal>ul {
+  list-style: none;
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+.principal>ul>li {
+  position: relative;
+}
+
+.principal>ul>li>a,
+.principal>ul>li>button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font: inherit;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.05rem;
+  text-decoration: none;
+  transition: color .15s ease, border-color .15s ease;
+}
+
+.principal>ul>li>a:hover,
+.principal>ul>li>button:hover,
+.principal>ul>li>button[aria-expanded='true'],
+.principal>ul>li.on>a,
+.principal>ul>li.on>button {
+  color: #fff;
+  border-bottom-color: var(--ouro);
+}
+
+.seta {
+  font-size: 0.62rem;
+  opacity: 0.75;
+  transition: transform .2s ease;
+}
+
+.principal>ul>li>button[aria-expanded='true'] .seta {
+  transform: rotate(180deg);
+}
+
+/* Mega-dropdown (desktop) */
+.sub {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  min-width: 310px;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 0.5rem;
+  box-shadow: 0 24px 50px -22px rgba(8, 31, 61, 0.55);
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), minmax(236px, 1fr));
+  grid-template-rows: repeat(var(--rows, 6), auto);
+  grid-auto-flow: column;
+  gap: 0.1rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+
+.sub.aberto {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sub::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 1.5rem;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-left: 1px solid var(--linha);
+  border-top: 1px solid var(--linha);
+  transform: rotate(45deg);
+}
+
+/* Dropdown alinhado à direita (itens próximos da borda — não estoura a viewport) */
+.sub.sub-right {
+  left: auto;
+  right: 0;
+}
+
+.sub.sub-right::before {
+  left: auto;
+  right: 1.5rem;
+}
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.sub-item:hover {
+  background: var(--gelo);
+}
+
+.sub-ic {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--navy);
+  color: var(--amarelo);
+  transition: background .15s ease, color .15s ease;
+}
+
+.sub-item:hover .sub-ic {
+  background: var(--azul);
+  color: #fff;
+}
+
+.sub-tx {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.sub-tit {
+  font-weight: 700;
+  color: var(--tinta);
+  font-size: 0.95rem;
+}
+
+.sub-desc {
+  font-size: 0.8rem;
+  color: var(--cinza);
+}
+
+/* Logo do admin: círculo compacto com borda dourada sutil */
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(201, 164, 74, 0.5);
+  padding: 3px;
+  flex: none;
+}
+
+@media (max-width: 880px) {
+  /* No mobile o header fica estático — sem sticky */
+  .sticky-shell {
+    position: static;
+    box-shadow: none;
+  }
+
+  /* Redes sociais e divisor somem no mobile */
+  .nav-redes,
+  .nav-divisor {
+    display: none;
+  }
+
+  .nav-bar {
+    border-bottom: 2px solid var(--ouro);
+  }
+
+  /* wrap vira flex com quebra de linha: brand+toggle na 1ª linha, ul na 2ª */
+  .nav-bar .wrap {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .brand {
+    padding: 0.65rem 0;
+    flex: 1;
+  }
+
+  /* principal some da caixa — filhos (toggle + ul) viram filhos diretos do wrap */
+  .principal {
+    display: contents;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    order: 1;
+  }
+
+  .nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ul ocupa linha inteira, com margem negativa para escapar do padding do wrap */
+  .principal>ul {
+    display: none;
+    order: 2;
+    flex-basis: calc(100% + 2rem);
+    margin-left: -1.5rem;
+    margin-right: -1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #0d1f3c;
+    padding: 0.5rem 1rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .principal>ul.aberto {
+    display: flex;
+  }
+
+  .principal>ul>li {
+    position: static;
+  }
+
+  .principal>ul>li>a,
+  .principal>ul>li>button {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 44px;
+  }
+
+  .principal>ul>li>a::after,
+  .principal>ul>li>button::after {
+    display: none;
+  }
+
+  .sub {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    box-shadow: none;
+    border: 0;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem;
+    margin: 0.1rem 0 0.4rem;
+    min-width: 0;
+  }
+
+  .sub::before {
+    display: none;
+  }
+
+  .sub-tit {
+    color: #eaf1fb;
+  }
+
+  .sub-desc {
+    color: #9fb1c8;
+  }
+
+  .sub-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+

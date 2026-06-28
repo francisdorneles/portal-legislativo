@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup — Fontes para a marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather:wght@700&family=Bitter:wght@600;700&family=Source+Serif+4:wght@600;700&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&family=Inter:wght@600;700&family=DM+Sans:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', sans-serif; background: #f1f5f9; padding: 2rem; }
+h1 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b; margin-bottom: 1.5rem; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05);
+}
+.card-label {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.5rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-label .rec {
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+
+/* Simulação do header do portal */
+.brand-preview {
+  background: #fff;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Medalhão (quando sem logo) */
+.blk {
+  width: 64px;
+  height: 64px;
+  background: #0f2c52;
+  color: #c9a84c;
+  border: 2px solid #c9a84c;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: 'Archivo Black', 'Segoe UI', sans-serif;
+  font-weight: 900;
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.brand-text { display: flex; flex-direction: column; gap: 0.2rem; }
+.brand-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #64748b;
+  font-family: -apple-system, 'Segoe UI', sans-serif;
+}
+.brand-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f2c52;
+  line-height: 1.15;
+}
+
+/* Variantes de fonte */
+.f-lora       .brand-name { font-family: 'Lora', Georgia, serif; }
+.f-merri      .brand-name { font-family: 'Merriweather', Georgia, serif; font-size: 1.05rem; }
+.f-bitter     .brand-name { font-family: 'Bitter', Georgia, serif; }
+.f-source     .brand-name { font-family: 'Source Serif 4', Georgia, serif; }
+.f-montserrat .brand-name { font-family: 'Montserrat', sans-serif; }
+.f-playfair   .brand-name { font-family: 'Playfair Display', Georgia, serif; }
+.f-inter      .brand-name { font-family: 'Inter', sans-serif; }
+.f-dmsans     .brand-name { font-family: 'DM Sans', sans-serif; }
+.f-jakarta    .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; }
+.f-outfit     .brand-name { font-family: 'Outfit', sans-serif; }
+
+/* Separador de seção */
+.section-title {
+  grid-column: 1 / -1;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  padding: 1rem 0 0.25rem;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 0.5rem;
+}
+
+/* Nav bar simulada */
+.nav-preview {
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 3px solid #c9a84c;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0;
+}
+.nav-item {
+  font-size: 0.8rem;
+  color: #0f2c52;
+  font-weight: 500;
+  padding: 0.75rem 0.875rem;
+  border-bottom: 2px solid transparent;
+  font-family: -apple-system, 'Segoe UI', sans-serif;
+  white-space: nowrap;
+}
+.nav-item.ativo { border-bottom-color: #2563eb; color: #2563eb; }
+</style>
+</head>
+<body>
+
+<h1>Mockup de fontes — .brand do portal</h1>
+
+<div class="grid">
+
+  <div class="section-title">Serif (tradição / autoridade)</div>
+
+  <!-- LORA -->
+  <div class="card f-lora">
+    <div class="card-label">Lora 700 — serif elegante <span class="rec">recomendada</span></div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- MERRIWEATHER -->
+  <div class="card f-merri">
+    <div class="card-label">Merriweather 700 — serif robusta</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- BITTER -->
+  <div class="card f-bitter">
+    <div class="card-label">Bitter 700 — slab serif</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- SOURCE SERIF 4 -->
+  <div class="card f-source">
+    <div class="card-label">Source Serif 4 — serif moderna</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <div class="section-title">Sans-serif (leitura fácil)</div>
+
+  <!-- INTER -->
+  <div class="card f-inter">
+    <div class="card-label">Inter 600 — gov.br <span class="rec">legível</span></div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- DM SANS -->
+  <div class="card f-dmsans">
+    <div class="card-label">DM Sans 600 — suave e moderna</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- PLUS JAKARTA SANS -->
+  <div class="card f-jakarta">
+    <div class="card-label">Plus Jakarta Sans 600 — elegante</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- OUTFIT -->
+  <div class="card f-outfit">
+    <div class="card-label">Outfit 600 — limpa e contemporânea</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <div class="section-title">Referência atual + serif decorativa</div>
+
+  <!-- MONTSERRAT (atual) -->
+  <div class="card f-montserrat">
+    <div class="card-label">Montserrat 700 — atual (sans-serif)</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+  <!-- PLAYFAIR -->
+  <div class="card f-playfair">
+    <div class="card-label">Playfair Display — serif decorativa</div>
+    <div class="brand-preview">
+      <div class="blk">C</div>
+      <div class="brand-text">
+        <span class="brand-sub">Poder Legislativo</span>
+        <span class="brand-name">Câmara Municipal de Taquari</span>
+      </div>
+    </div>
+    <div class="nav-preview">
+      <span class="nav-item ativo">Institucional</span>
+      <span class="nav-item">Vereadores</span>
+      <span class="nav-item">Processo Legislativo</span>
+      <span class="nav-item">Transparência</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

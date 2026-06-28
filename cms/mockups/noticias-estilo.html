@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notícias — layout final</title>
+<style>
+  :root {
+    --navy: #081f3d;
+    --azul: #2a6fdb;
+    --amarelo: #ffce3a;
+    --cinza: #6b7280;
+    --linha: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #eef2f7; color: #1a2740; line-height: 1.5; }
+  a { text-decoration: none; color: inherit; }
+
+  .page { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  .label {
+    font-size: 0.7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cinza); margin-bottom: 1.5rem; padding-bottom: .5rem;
+    border-bottom: 1px solid var(--linha);
+  }
+
+  /* placeholders */
+  .ph  { background: linear-gradient(135deg, #b0c4d8, #8aa0b8); }
+  .ph2 { background: linear-gradient(135deg, #c0ccd8, #90a8bc); }
+  .ph3 { background: linear-gradient(135deg, #a8bcd0, #7898b0); }
+  .ph4 { background: linear-gradient(135deg, #c8d0dc, #a0aabb); }
+
+  /* ── grade destaque ───────────────────────────────── */
+  .nd {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  /* ── destaque principal: B ────────────────────────── */
+  .destaque {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--linha);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .destaque .img {
+    aspect-ratio: 16/9;
+    display: block;
+    width: 100%;
+  }
+  .destaque .b {
+    padding: 1rem 1.2rem 1.3rem;
+  }
+  .destaque .meta {
+    display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem;
+  }
+  .destaque .cat {
+    font-size: .65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--azul);
+  }
+  .destaque .dot { width: 3px; height: 3px; border-radius: 99px; background: #ccc; }
+  .destaque .date { font-size: .68rem; color: var(--cinza); }
+  .destaque h2 {
+    font-size: 1.35rem; font-weight: 900; line-height: 1.15; letter-spacing: -.02em;
+  }
+
+  /* ── laterais: editorial com separador ───────────── */
+  .lado {
+    display: flex;
+    flex-direction: column;
+  }
+  .lado a {
+    display: flex;
+    gap: 1rem;
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--linha);
+  }
+  .lado a:first-child { padding-top: 0; }
+  .lado a:last-child  { border-bottom: none; padding-bottom: 0; }
+  .lado .img {
+    width: 100px; flex: none; aspect-ratio: 4/3; border-radius: 5px;
+  }
+  .lado .b { display: flex; flex-direction: column; gap: .25rem; justify-content: center; }
+  .lado .cat {
+    font-size: .62rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--azul);
+  }
+  .lado h3 { font-size: .9rem; font-weight: 700; line-height: 1.2; }
+  .lado .date { font-size: .68rem; color: var(--cinza); }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="label">Notícias na home — layout escolhido</p>
+
+  <div class="nd">
+
+    <a class="destaque" href="#">
+      <div class="img ph"></div>
+      <div class="b">
+        <div class="meta">
+          <span class="cat">Legislativo</span>
+          <span class="dot"></span>
+          <span class="date">20 jun 2026</span>
+        </div>
+        <h2>Câmara aprova projeto de lei sobre mobilidade urbana no município</h2>
+      </div>
+    </a>
+
+    <div class="lado">
+      <a href="#">
+        <div class="img ph2"></div>
+        <div class="b">
+          <span class="cat">Sessão</span>
+          <h3>Plenário vota orçamento suplementar na sessão ordinária</h3>
+          <span class="date">19 jun 2026</span>
+        </div>
+      </a>
+      <a href="#">
+        <div class="img ph3"></div>
+        <div class="b">
+          <span class="cat">Institucional</span>
+          <h3>Câmara recebe visita de estudantes da rede municipal</h3>
+          <span class="date">18 jun 2026</span>
+        </div>
+      </a>
+      <a href="#">
+        <div class="img ph4"></div>
+        <div class="b">
+          <span class="cat">Legislativo</span>
+          <h3>Comissão aprecia requerimento de audiência pública</h3>
+          <span class="date">17 jun 2026</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

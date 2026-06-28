@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Câmara de Lajeado — Layout 3: Contemporâneo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#081f3d; --navy-2:#0d2c54; --azul:#2a6fdb; --azul-claro:#5b9bff; --amarelo:#ffce3a;
+    --tinta:#0e1726; --cinza:#5a6675; --gelo:#f4f7fb; --linha:#e2e8f1; --branco:#fff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--branco);color:var(--tinta);
+    font-family:"Public Sans",system-ui,sans-serif;font-size:17px;line-height:1.6}
+  a{color:inherit}
+  h1,h2,h3{font-family:"Archivo",system-ui,sans-serif;margin:0;line-height:1.05;letter-spacing:-.02em}
+  .skip{position:absolute;left:-999px;background:var(--amarelo);color:var(--navy);padding:.6rem 1rem;font-weight:700;z-index:100}
+  .skip:focus{left:0}
+  :focus-visible{outline:3px solid var(--amarelo);outline-offset:2px}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+
+  .util{background:var(--navy);color:#cdd9ea;font-size:.83rem}
+  .util .wrap{display:flex;justify-content:space-between;align-items:center;min-height:40px;gap:1rem;flex-wrap:wrap}
+  .util a{text-decoration:none;padding:.3rem .4rem}.util a:hover{color:var(--amarelo)}
+  .util nav{display:flex;gap:.6rem;align-items:center}
+
+  header.main{background:var(--navy-2)}
+  header.main .wrap{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;gap:1rem;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:.85rem;color:#fff}
+  .blk{width:50px;height:50px;background:var(--amarelo);color:var(--navy);display:grid;place-items:center;border-radius:12px;
+    font-family:"Archivo";font-weight:900;font-size:1.6rem}
+  .brand b{font-family:"Archivo";font-weight:800;font-size:1.3rem;display:block;line-height:1}
+  .brand span{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--azul-claro);font-weight:700}
+  nav.principal ul{list-style:none;display:flex;gap:.15rem;margin:0;padding:0;flex-wrap:wrap}
+  nav.principal a{text-decoration:none;color:#dbe6f5;font-weight:600;font-size:.93rem;padding:.55rem .8rem;border-radius:8px}
+  nav.principal a:hover,nav.principal a[aria-current]{background:var(--azul);color:#fff}
+
+  /* hero dark com grid */
+  .hero{background:
+    radial-gradient(60% 120% at 85% 0%, rgba(42,111,219,.55), transparent 60%),
+    var(--navy);color:#fff;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:44px 44px;mask-image:radial-gradient(70% 70% at 50% 30%,#000,transparent)}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.5fr 1fr;gap:2.5rem;padding:4rem 1.5rem;align-items:center}
+  .tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,206,58,.15);color:var(--amarelo);
+    border:1px solid rgba(255,206,58,.4);border-radius:99px;padding:.35rem .9rem;font-size:.8rem;font-weight:700;letter-spacing:.04em}
+  .hero h1{font-size:3.6rem;font-weight:900;margin:1.1rem 0 1rem}
+  .hero h1 u{text-decoration:none;color:var(--amarelo)}
+  .hero p{font-size:1.15rem;color:#bcccdf;max-width:46ch}
+  .cta{margin-top:1.8rem;display:flex;gap:.8rem;flex-wrap:wrap}
+  .btn{text-decoration:none;font-weight:700;padding:.85rem 1.4rem;border-radius:10px;display:inline-block}
+  .btn-am{background:var(--amarelo);color:var(--navy)}.btn-am:hover{background:#ffd95e}
+  .btn-gh{border:1.5px solid rgba(255,255,255,.4);color:#fff}.btn-gh:hover{background:rgba(255,255,255,.1)}
+  .card-sessao{background:rgba(255,255,255,.07);backdrop-filter:blur(4px);border:1px solid rgba(91,155,255,.4);
+    border-radius:16px;padding:1.6rem}
+  .card-sessao .l{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amarelo);font-weight:700}
+  .card-sessao .d{font-family:"Archivo";font-weight:800;font-size:2.2rem;margin:.3rem 0}
+  .card-sessao ul{margin:.9rem 0 0;padding-left:1.1rem;color:#bcccdf;font-size:.92rem}
+
+  section{padding:3.6rem 0}
+  .sec-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1.8rem}
+  .sec-head h2{font-size:1.9rem;font-weight:800}
+  .sec-head .bar{width:34px;height:5px;background:var(--amarelo);border-radius:3px}
+  .sec-head a{margin-left:auto;text-decoration:none;font-weight:700;color:var(--azul)}
+
+  .atalhos{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .atalho{text-decoration:none;background:var(--gelo);border-radius:14px;padding:1.5rem;transition:.16s;border:2px solid transparent}
+  .atalho:hover{background:#fff;border-color:var(--azul);transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(8,31,61,.5)}
+  .atalho .ic{width:44px;height:44px;background:var(--navy);color:var(--amarelo);border-radius:10px;padding:9px;margin-bottom:.8rem}
+  .atalho h3{font-size:1.1rem;font-weight:700;margin-bottom:.25rem}
+  .atalho p{margin:0;font-size:.88rem;color:var(--cinza)}
+
+  .noticias{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .card{border:1px solid var(--linha);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;background:#fff}
+  .card .img{aspect-ratio:16/10;background:linear-gradient(135deg,var(--azul),var(--navy));position:relative}
+  .card .img .cat{position:absolute;left:.8rem;top:.8rem;background:var(--amarelo);color:var(--navy);
+    font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:.25rem .6rem;border-radius:6px}
+  .card .b{padding:1.2rem;flex:1;display:flex;flex-direction:column}
+  .card .date{font-size:.8rem;color:var(--cinza);font-weight:600}
+  .card h3{font-size:1.18rem;font-weight:700;margin:.35rem 0 .5rem}
+  .card p{margin:0;font-size:.9rem;color:var(--cinza)}
+  .card a.m{margin-top:auto;padding-top:.8rem;font-weight:700;color:var(--azul);text-decoration:none}
+  .card a.m:hover{text-decoration:underline}
+
+  .transp{background:var(--navy);color:#fff;border-radius:20px;overflow:hidden;position:relative}
+  .transp .in{display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:2.6rem;flex-wrap:wrap;position:relative;z-index:1}
+  .transp::after{content:"";position:absolute;right:-40px;top:-40px;width:240px;height:240px;background:var(--azul);
+    border-radius:50%;filter:blur(10px);opacity:.45}
+  .transp h2{font-size:1.9rem;font-weight:800}
+  .transp p{margin:.5rem 0 0;color:#bcccdf;max-width:52ch}
+
+  footer{background:var(--navy);color:#9fb1c8;font-size:.9rem;padding:2.8rem 0 1.4rem}
+  footer .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem}
+  footer h4{font-family:"Archivo";color:#fff;font-weight:700;margin:0 0 .6rem;font-size:1.05rem}
+  footer a{display:block;text-decoration:none;color:#9fb1c8;padding:.18rem 0}
+  footer a:hover{color:var(--amarelo)}
+  footer .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:2rem;padding-top:1.2rem;font-size:.82rem}
+
+  @media(max-width:900px){
+    .hero .wrap,.atalhos,.noticias,footer .cols{grid-template-columns:1fr}
+    .atalhos{grid-template-columns:1fr 1fr}
+    .hero h1{font-size:2.5rem}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="util">
+  <div class="wrap">
+    <span>Câmara Municipal de Lajeado · RS</span>
+    <nav aria-label="Acessos rápidos">
+      <a href="#">Transparência</a><a href="#">e-SIC</a><a href="#">Ouvidoria</a>
+      <a href="#" aria-label="Alto contraste">Contraste</a><a href="#" aria-label="Aumentar fonte">A+</a>
+    </nav>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="brand">
+      <span class="blk" aria-hidden="true">L</span>
+      <div><span>Poder Legislativo</span><b>Câmara de Lajeado</b></div>
+    </div>
+    <nav class="principal" aria-label="Menu principal">
+      <ul>
+        <li><a href="#" aria-current="page">Início</a></li>
+        <li><a href="#">Institucional</a></li>
+        <li><a href="#">Vereadores</a></li>
+        <li><a href="#">Processo Legislativo</a></li>
+        <li><a href="#">Sessões</a></li>
+        <li><a href="#">Transparência</a></li>
+        <li><a href="#">Notícias</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="hero" style="padding:0">
+    <div class="wrap">
+      <div>
+        <span class="tag">● Transmissão ao vivo nas sessões</span>
+        <h1>Lajeado decide <u>em público</u>.</h1>
+        <p>Acompanhe projetos de lei, sessões, legislação e transparência num portal rápido, oficial e acessível a todos.</p>
+        <div class="cta">
+          <a class="btn btn-am" href="#">Consultar projetos</a>
+          <a class="btn btn-gh" href="#">Assistir às sessões</a>
+        </div>
+      </div>
+      <aside class="card-sessao" aria-label="Próxima sessão">
+        <div class="l">Próxima sessão ordinária</div>
+        <div class="d">23 jun · 18h</div>
+        <span style="color:#bcccdf">Plenário Ver. João Batista da Silva</span>
+        <ul>
+          <li>PL 045/2026 — Plano Diretor</li>
+          <li>Moções e requerimentos</li>
+          <li>Tribuna livre</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-serv">
+    <div class="sec-head"><span class="bar" aria-hidden="true"></span><h2 id="t-serv">Serviços ao cidadão</h2></div>
+    <div class="atalhos">
+      <a class="atalho" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5"/></svg><h3>Processo Legislativo</h3><p>Projetos, tramitação e votações.</p></a>
+      <a class="atalho" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6"/></svg><h3>Legislação</h3><p>Busca em leis e normas.</p></a>
+      <a class="atalho" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg><h3>Transparência</h3><p>Despesas, contratos e contas.</p></a>
+      <a class="atalho" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>e-SIC e Ouvidoria</h3><p>Informação e manifestações.</p></a>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-not">
+    <div class="sec-head"><span class="bar" aria-hidden="true"></span><h2 id="t-not">Notícias</h2><a href="#">Ver todas →</a></div>
+    <div class="noticias">
+      <article class="card"><div class="img" aria-hidden="true"><span class="cat">Sessões</span></div><div class="b"><span class="date">17/06/2026</span><h3>Câmara aprova ampliação do transporte escolar rural</h3><p>Proposta segue para sanção após votação unânime no plenário.</p><a class="m" href="#">Ler mais →</a></div></article>
+      <article class="card"><div class="img" aria-hidden="true"><span class="cat">Comunicados</span></div><div class="b"><span class="date">15/06/2026</span><h3>Audiência pública debate o orçamento de 2027</h3><p>Encontro acontece no dia 28 e é aberto à população.</p><a class="m" href="#">Ler mais →</a></div></article>
+      <article class="card"><div class="img" aria-hidden="true"><span class="cat">Projetos</span></div><div class="b"><span class="date">12/06/2026</span><h3>Nova lei institui a Semana da Cultura Lajeadense</h3><p>Iniciativa valoriza artistas locais e o patrimônio histórico.</p><a class="m" href="#">Ler mais →</a></div></article>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="transp">
+      <div class="in">
+        <div>
+          <h2>Portal da Transparência</h2>
+          <p>Despesas, receitas, licitações, contratos e folha de pagamento — conforme a Lei de Acesso à Informação.</p>
+        </div>
+        <a class="btn btn-am" href="#">Acessar transparência</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Câmara de Lajeado</h4><p style="margin:.3rem 0 0">Rua Júlio May, 100 — Centro<br>Lajeado/RS · (51) 3714-0000</p></div>
+      <div><h4>Institucional</h4><a href="#">Vereadores</a><a href="#">Mesa Diretora</a><a href="#">Comissões</a><a href="#">História</a></div>
+      <div><h4>Cidadão</h4><a href="#">e-SIC</a><a href="#">Ouvidoria</a><a href="#">Transparência</a></div>
+      <div><h4>Legislativo</h4><a href="#">Projetos</a><a href="#">Legislação</a><a href="#">Sessões</a></div>
+    </div>
+    <div class="legal">© 2026 Câmara Municipal de Lajeado · LAI · LGPD · Acessibilidade (eMAG/WCAG)</div>
+  </div>
+</footer>
+</body>
+</html>

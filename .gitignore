@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.local
+.DS_Store
+*.log
+.next/
+/out/
+/build/
+dist/
+*.tsbuildinfo
+
+# Pastas pesadas de documentação/assets locais
+cms/docs/
+cms/media/
+cms/material/
+spike/
+spike-crm/
