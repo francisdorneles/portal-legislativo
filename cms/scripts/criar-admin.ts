@@ -30,7 +30,7 @@ const criar = async () => {
     process.exit(0)
   }
 
-  await payload.create({ collection: 'users', data: { email, password } })
+  await payload.create({ collection: 'users', data: { email, password, role: 'admin' } })
   console.log(`Admin criado: ${email}`)
   process.exit(0)
 }
